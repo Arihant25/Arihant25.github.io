@@ -1,0 +1,52 @@
+header {
+  max-height: 527px;
+  text-align: center;
+  position: relative;
+  max-width: 1920px;
+}
+
+#heading {
+  position: absolute;
+  top: 8px;
+  right: 60px;
+}
+
+#subheading {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+}
+
+.intro {
+  text-align: center;
+}
+
+.button-container {
+  height: 10px;
+  position: relative;
+}
+
+.buttons {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#line{
+  padding-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+footer {
+  height: 50px;
+}
+
+#copy {
+  padding-top: 10px;
+}
