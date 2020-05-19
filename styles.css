@@ -1,10 +1,17 @@
+html, body{
+  padding: 0;
+  margin: 0;
+}
+
 header {
   max-height: 527px;
   text-align: center;
   position: relative;
-  max-width: 1920px;
 }
 
+#city{
+  width: 100%;
+}
 #heading {
   position: absolute;
   top: 8px;
@@ -19,20 +26,19 @@ header {
 
 .intro {
   text-align: center;
+  margin-top: 20px;
 }
 
-.button-container {
-  height: 10px;
-  position: relative;
-}
-
-.buttons {
+#card1 {
   margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  position: relative;
+  left: 70%;
+}
+
+#card2 {
+  margin: 0;
+  position: relative;
+
 }
 
 #line{
@@ -49,4 +55,26 @@ footer {
 
 #copy {
   padding-top: 10px;
+}
+
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid red; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+    typing 2.5s steps(40, end)
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 17% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
 }
