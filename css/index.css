@@ -65,10 +65,8 @@ nav {
 nav>ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
-    padding: 1%;
+    padding: 2%;
     margin-top: 0.1%;
-    padding-top: 1%;
     margin-bottom: 1%;
 
     /* Horizontal align */
@@ -115,11 +113,15 @@ nav>ul>a>li:hover {
     visibility: hidden;
 }
 
-/* Create a custom toggle switch */
+/* Center the toggle */
+nav>ul>li:nth-child(7) {
+    display: flex;
+}
+
+/* Custom dark mode toggle switch */
 .dark-mode label {
     cursor: pointer;
-    text-indent: -9999px;
-    width: 52px;
+    width: 51px;
     height: 27px;
     background: grey;
     display: block;
@@ -127,7 +129,7 @@ nav>ul>a>li:hover {
     position: relative;
 }
 
-/* Create the switch indicator */
+/* Switch indicator */
 .dark-mode label:after {
     content: '🌞';
     position: absolute;
@@ -143,6 +145,7 @@ nav>ul>a>li:hover {
     align-items: center;
     font-size: 12px;
     color: #fff;
+
 }
 
 /* Change the background color and move the switch indicator when the checkbox is checked */
@@ -160,7 +163,7 @@ nav>ul>a>li:hover {
 
 /* Hero */
 #hero {
-    background-image: url("/img/header.jpg");
+    background-image: url("../img/header.jpg");
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
@@ -180,7 +183,7 @@ nav>ul>a>li:hover {
 
 #hero:hover {
     cursor: default;
-    background-image: url("/img/header.gif");
+    background-image: url("../img/header.gif");
 }
 
 .hero-text {
@@ -259,6 +262,7 @@ hr {
     border: none;
     outline: none;
     transition: all 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 #go-top:hover {
@@ -339,7 +343,7 @@ hr {
     transform: scale(1.1);
 }
 
-/* Acheivements Cards */
+/* Achievements Cards */
 #achievements {
     /* Flex Horizontal Align */
     display: flex;
@@ -572,11 +576,6 @@ body.dark-mode #social-media>a {
 
 /* Mobile */
 @media screen and (max-width: 736px) {
-    navbar {
-        margin-bottom: 5%;
-        font-size: 0.3em;
-    }
-
     #menu {
         visibility: hidden;
         overflow: hidden;
@@ -586,6 +585,23 @@ body.dark-mode #social-media>a {
 
     #menu-button {
         display: block;
+        background-color: #f5f5f5;
+        border: none;
+        color: #212529;
+        padding-top: 1%;
+        padding-left: 1%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.9em;
+        margin: 1%;
+        cursor: pointer;
+    }
+
+    /* Dark menu */
+    body.dark-mode #menu-button {
+        background-color: #212529;
+        color: #f5f5f5;
     }
 
     /* Show the menu when it has the 'open' class */
