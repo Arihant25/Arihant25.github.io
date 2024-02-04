@@ -497,7 +497,7 @@ body.dark-mode nav>ul>a {
 }
 
 body.dark-mode #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/header.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/header-dark.jpg');
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
@@ -514,8 +514,12 @@ body.dark-mode #hero {
     text-align: center;
 }
 
+body.dark-mode h2 {
+    color: #faa1f5;
+}
+
 body.dark-mode #hero:hover {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/header.gif');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/header-dark.gif');
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 

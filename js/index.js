@@ -30,9 +30,5 @@ document.getElementById('menu-button').addEventListener('click', function () {
 
 // Dark mode
 document.getElementById('dark-mode-toggle').addEventListener('change', function () {
-    if (this.checked) {
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
-    }
+    document.body.classList.toggle('dark-mode');
 });
