@@ -103,14 +103,14 @@
 </script>
 
 <!-- HERO -->
-<div class="mx-auto flex flex-row items-center p-4 py-12 sm:px-6 lg:px-8">
+<div class="mx-auto flex flex-col items-center p-4 py-12 sm:px-6 md:flex-row lg:px-8">
 	<h1
-		class="font-ibm-plex-serif mb-6 w-full text-center font-bold"
+		class="font-ibm-plex-serif mb-6 w-full text-center font-bold md:text-left"
 		style="font-size: min(10vw, 10rem); line-height: 1.2;"
 	>
 		Hi, I am Arihant<span class="orange">.</span>
 	</h1>
-	<p class="ml-24 max-w-2xl text-justify text-lg leading-relaxed font-light">
+	<p class="max-w-2xl text-justify text-lg leading-relaxed font-light md:ml-24">
 		I'm a Computer Science student and researcher at IIIT Hyderabad. I care about learning things
 		properly and building with clarity and purpose. I like working on projects that feel meaningful,
 		and I’m still figuring out what that means for me long-term. I'm also interested in sustainable
@@ -122,13 +122,16 @@
 
 <!-- QUOTE OF THE DAY -->
 <div
-	class="quote-section relative mx-auto my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg"
+	class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto"
 >
-	<div class="font-ibm-plex-serif absolute -top-9 left-4 text-9xl font-black orange" aria-hidden="true">
+	<div
+		class="font-ibm-plex-serif orange absolute -top-9 left-4 text-9xl font-black"
+		aria-hidden="true"
+	>
 		“
 	</div>
 	<p
-		class="font-ibm-plex-serif relative z-10 text-center text-2xl leading-relaxed italic text-white"
+		class="font-ibm-plex-serif relative z-10 text-center text-2xl leading-relaxed text-white italic"
 	>
 		{randomQuote}
 	</p>
