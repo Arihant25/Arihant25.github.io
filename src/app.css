@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Mono:wght@400;700&display=swap');
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+    --font-ibm-plex-serif: 'IBM Plex Serif', serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-space-mono: 'Space Mono', monospace;
+}
+
+body {
+    font-family: var(--font-inter);
+}
+
+h1 {
+    font-family: var(--font-ibm-plex-serif);
+}
+
+.orange {
+    color: #FF5722;
+}
+
+.bg-orange {
+    background-color: #FF5722;
+}
+
+/* Add underline animation for navbar links */
+.nav-underline {
+  position: relative;
+  overflow: hidden;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-underline:hover::after,
+.nav-underline:focus-visible::after {
+  width: 100%;
+}
