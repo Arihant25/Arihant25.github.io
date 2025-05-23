@@ -12,7 +12,7 @@
 	</h1>
 
 	<div
-		class="coming-soon-section relative mx-auto my-12 max-w-md rounded-lg border bg-gray-800 p-6 text-center shadow-lg"
+		class="coming-soon-section relative mx-auto my-12 max-w-md rounded-lg border p-6 text-center shadow-lg"
 	>
 		<p class="text-2xl leading-relaxed">Coming Soon!</p>
 		<p class="leading-relaxed">
