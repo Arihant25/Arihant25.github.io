@@ -4,7 +4,7 @@
 	let { data }: { data: PageData } = $props();
 	const { project } = data;
 
-	let selectedScreenshot: string | null = null;
+	let selectedScreenshot: string | null = $state(null);
 	let loadingStates: Record<number, boolean> = $state({});
 
 	function openFullscreen(imageUrl: string) {
@@ -155,8 +155,8 @@
 				<div class="order-first lg:order-last">
 					<div
 						class="cursor-pointer overflow-hidden rounded-2xl shadow-2xl"
-						on:click={() => openFullscreen(project.coverImage)}
-						on:keydown={(e) => e.key === 'Enter' && openFullscreen(project.coverImage)}
+						onclick={() => openFullscreen(project.coverImage)}
+						onkeydown={(e) => e.key === 'Enter' && openFullscreen(project.coverImage)}
 						role="button"
 						tabindex="0"
 						aria-label="View {project.name} cover image in fullscreen"
@@ -192,8 +192,8 @@
 					{#each project.screenshots as screenshot, index}
 						<div
 							class="group relative inline-block w-fit cursor-pointer justify-self-center overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
-							on:click={() => openFullscreen(screenshot)}
-							on:keydown={(e) => e.key === 'Enter' && openFullscreen(screenshot)}
+							onclick={() => openFullscreen(screenshot)}
+							onkeydown={(e) => e.key === 'Enter' && openFullscreen(screenshot)}
 							role="button"
 							tabindex="0"
 							aria-label="View screenshot {index + 1} of {project.name} in fullscreen"
@@ -217,8 +217,8 @@
 								class:opacity-0={loadingStates[index]}
 								class:opacity-100={!loadingStates[index]}
 								loading="lazy"
-								on:load={() => handleImageLoad(index)}
-								on:error={() => handleImageError(index)}
+								onload={() => handleImageLoad(index)}
+								onerror={() => handleImageError(index)}
 							/>
 						</div>
 					{/each}
@@ -230,8 +230,8 @@
 		{#if selectedScreenshot}
 			<div
 				class="bg-opacity-75 fixed inset-0 z-50 flex items-center justify-center bg-black"
-				on:click={closeFullscreen}
-				on:keydown={handleKeydown}
+				onclick={closeFullscreen}
+				onkeydown={handleKeydown}
 				role="dialog"
 				aria-modal="true"
 				tabindex="-1"
@@ -243,7 +243,10 @@
 					loading="lazy"
 				/>
 				<button
-					on:click|stopPropagation={closeFullscreen}
+					onclick={(e) => {
+						e.stopPropagation();
+						closeFullscreen();
+					}}
 					class="absolute top-4 right-4 text-3xl font-bold text-white"
 					aria-label="Close fullscreen image"
 				>
