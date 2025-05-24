@@ -15,6 +15,29 @@
 </script>
 
 <div class="flex min-h-screen w-full flex-col items-center bg-white px-4 py-8 sm:px-8 lg:px-16">
+	<!-- Back Navigation -->
+	<div class="mb-8 w-full max-w-3xl">
+		<a
+			href="/blog"
+			class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900"
+		>
+			<svg
+				class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M10 19l-7-7m0 0l7-7m-7 7h18"
+				></path>
+			</svg>
+			<span class="text-sm font-medium">Back to Blog</span>
+		</a>
+	</div>
+
 	<h1 class="mb-2 max-w-3xl text-center text-3xl font-bold orange sm:text-4xl lg:text-5xl">
 		{blog.title}
 	</h1>

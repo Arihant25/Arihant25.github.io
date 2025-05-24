@@ -13,7 +13,7 @@
 	</h1>
 
 	<!-- Blog Cards Grid -->
-	<div class="mb-12 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+	<div class="mb-12 grid grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-3 xl:grid-cols-4 place-items-center">
 		{#each sortedBlogs as blog}
 			<BlogCard {blog} />
 		{/each}

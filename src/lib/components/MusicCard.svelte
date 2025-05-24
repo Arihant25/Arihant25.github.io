@@ -122,7 +122,7 @@
 
 	<!-- CD Cover -->
 	<div class="cd-cover" class:hovered={isHovered}>
-		<img src={coverImage} alt={title} class="cover-image" />
+		<img src={coverImage} alt={title} class="cover-image" loading="lazy" />
 		<div class="year-tag">{year}</div>
 	</div>
 

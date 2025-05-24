@@ -149,6 +149,7 @@
 					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7u0wMKb82XPecYpwI62YkRk7rndyLN12hdQ&s"
 					alt="OSDG, IIIT Hyderabad Logo"
 					class="h-70 w-70 rounded-lg object-contain shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 			<div class="order-2 md:order-2 md:w-1/2">
@@ -205,6 +206,7 @@
 					src="serc.jpg"
 					alt="Software Engineering Research Center, IIIT Hyderabad Logo"
 					class="h-83 w-110 rounded-lg object-contain shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 		</div>
@@ -216,6 +218,7 @@
 					src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/WTS_2024_Group_Photo.jpg/640px-WTS_2024_Group_Photo.jpg"
 					alt="Wikimedia Foundation Logo"
 					class="h-70 w-120 rounded-lg object-cover shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 			<div class="order-2 md:order-2 md:w-1/2">
@@ -264,6 +267,7 @@
 					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJE44xfCFx7DuvvShEQw5r9koO1M-kcxx28w&s"
 					alt="Infosys Logo"
 					class="h-60 w-80 rounded-lg object-contain shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 		</div>
@@ -290,6 +294,7 @@
 					src="https://assets.odishabytes.com/wp-content/uploads/2021/07/SAI-International-School.jpg"
 					alt="SAI International School"
 					class="h-70 w-120 rounded-lg object-cover shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 		</div>
@@ -301,6 +306,7 @@
 					src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/IIIT_Hyderabad_Drone_view.jpg/640px-IIIT_Hyderabad_Drone_view.jpg"
 					alt="IIIT Hyderabad"
 					class="h-70 w-120 rounded-lg object-cover shadow-lg"
+					loading="lazy"
 				/>
 			</div>
 			<div class="md:w-1/2">

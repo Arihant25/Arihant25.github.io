@@ -144,6 +144,7 @@
 							src={`${project.coverImage}`}
 							alt={project.name}
 							class="h-auto w-full object-cover"
+							loading="lazy"
 						/>
 					</div>
 				</div>
@@ -180,6 +181,7 @@
 								src={screenshot}
 								alt={`Screenshot ${index + 1} of {project.name}`}
 								class="block h-auto transition-transform duration-300 group-hover:scale-110"
+								loading="lazy"
 							/>
 						</div>
 					{/each}
@@ -201,6 +203,7 @@
 					src={selectedScreenshot}
 					alt="Fullscreen Screenshot"
 					class="max-h-screen max-w-screen object-contain p-4"
+					loading="lazy"
 				/>
 				<button
 					on:click|stopPropagation={closeFullscreen}

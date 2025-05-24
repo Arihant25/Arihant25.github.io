@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
 	interface Project {
 		name: string;
 		codeUrl: string;
@@ -17,28 +20,128 @@
 	}
 
 	let { project }: Props = $props();
+
+	// Animation states
+	let isPressed = $state(false);
+	let isNavigating = $state(false);
+	let isMobile = $state(false);
+	let cardElement: HTMLElement;
+
+	// Check if device is mobile/touch
+	onMount(() => {
+		isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+		
+		// Add haptic feedback for iOS devices
+		if (isMobile && 'vibrate' in navigator) {
+			// Light haptic feedback on touch
+		}
+	});
+
+	function handleClick(event: MouseEvent | TouchEvent) {
+		event.preventDefault();
+
+		// Don't handle if clicking on external links
+		if ((event.target as HTMLElement)?.closest('a[href^="http"]')) {
+			return;
+		}
+
+		// Add haptic feedback for mobile
+		if (isMobile && 'vibrate' in navigator) {
+			navigator.vibrate(50); // Light vibration
+		}
+
+		// Add immediate feedback for touch devices
+		if (isMobile) {
+			isPressed = true;
+			setTimeout(() => {
+				isPressed = false;
+			}, 150);
+		}
+
+		// Start navigation animation
+		isNavigating = true;
+
+		// Navigate after a delightful delay
+		setTimeout(() => {
+			goto(`/code/${project.slug}`);
+		}, isMobile ? 400 : 200);
+	}
+
+	function handleTouchStart() {
+		if (isMobile) {
+			isPressed = true;
+		}
+	}
+
+	function handleTouchEnd() {
+		if (isMobile) {
+			setTimeout(() => {
+				isPressed = false;
+			}, 100);
+		}
+	}
+
+	function handleMouseDown() {
+		if (!isMobile) {
+			isPressed = true;
+		}
+	}
+
+	function handleMouseUp() {
+		if (!isMobile) {
+			isPressed = false;
+		}
+	}
+
+	function handleMouseLeave() {
+		isPressed = false;
+	}
 </script>
 
-<a
-	href="/code/{project.slug}"
-	class="group block w-80 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10"
+<div
+	bind:this={cardElement}
+	class="group block w-80 transition-all duration-500 cursor-pointer select-none"
+	class:pressed={isPressed}
+	class:navigating={isNavigating}
+	class:mobile={isMobile}
+	onclick={handleClick}
+	onmousedown={handleMouseDown}
+	onmouseup={handleMouseUp}
+	onmouseleave={handleMouseLeave}
+	ontouchstart={handleTouchStart}
+	ontouchend={handleTouchEnd}
+	role="button"
+	tabindex="0"
+	onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleClick(e)}
 >
 	<!-- Project Card Container -->
 	<div
-		class="relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:border-gray-200"
+		class="project-card relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:border-gray-200"
 	>
+		<!-- Loading Overlay -->
+		{#if isNavigating}
+			<div class="loading-overlay absolute inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm">
+				<div class="loading-spinner"></div>
+			</div>
+		{/if}
 		<!-- Project Image Container -->
-		<div class="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+		<div class="image-container relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
 			<img
 				src={project.coverImage}
 				alt={project.name}
-				class="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+				class="project-image h-52 w-full object-cover transition-transform duration-700"
+				loading="lazy"
 			/>
 
 			<!-- Gradient Overlay -->
 			<div
-				class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+				class="overlay absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300"
 			></div>
+
+			<!-- Ripple Effect for Touch -->
+			<div class="ripple-container absolute inset-0 overflow-hidden pointer-events-none">
+				<div class="ripple"></div>
+			</div>
 
 			<!-- Year Badge -->
 			<div
@@ -74,14 +177,14 @@
 		<div class="space-y-3 p-6">
 			<div class="flex items-start justify-between">
 				<h3
-					class="text-xl leading-tight font-bold text-gray-900 transition-colors duration-300 group-hover:text-orange-600"
+					class="project-title text-xl leading-tight font-bold text-gray-900 transition-colors duration-300"
 				>
 					{project.name}
 				</h3>
 
 				<!-- Arrow Icon -->
 				<div
-					class="ml-3 flex-shrink-0 translate-x-2 transform opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+					class="arrow-icon ml-3 flex-shrink-0"
 				>
 					<svg
 						class="h-5 w-5 text-orange-500"
@@ -106,14 +209,14 @@
 			<!-- Bottom Action Area -->
 			<div class="flex items-center justify-between pt-2">
 				<span
-					class="translate-y-1 transform text-sm font-medium text-orange-600 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+					class="view-text text-sm font-medium text-orange-600"
 				>
 					View Project
 				</span>
 
 				<!-- External Links -->
 				<div
-					class="flex space-x-2 opacity-60 transition-opacity duration-300 group-hover:opacity-100"
+					class="external-links flex space-x-2"
 				>
 					{#if project.codeUrl}
 						<a
@@ -121,6 +224,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="View source code on GitHub"
+							onclick={(e) => e.stopPropagation()}
 						>
 							<div class="h-5 w-5 text-gray-500 transition-colors hover:text-orange-600">
 								<svg fill="currentColor" viewBox="0 0 24 24">
@@ -137,6 +241,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="View deployed project"
+							onclick={(e) => e.stopPropagation()}
 						>
 							<div class="h-5 w-5 text-gray-500 transition-colors hover:text-orange-600">
 								<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,4 +259,183 @@
 			</div>
 		</div>
 	</div>
-</a>
+</div>
+
+<style>
+	/* Base transitions and hover effects */
+	.group:hover:not(.pressed):not(.navigating) {
+		transform: translateY(-8px);
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+	}
+
+	.group:hover .project-image {
+		transform: scale(1.1);
+	}
+
+	.group:hover .overlay {
+		opacity: 1;
+	}
+
+	.group:hover .arrow-icon {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	.group:hover .view-text {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	.group:hover .external-links {
+		opacity: 1;
+	}
+
+	.group:hover .project-title {
+		color: #ea580c; /* orange-600 */
+	}
+
+	/* Mobile touch feedback */
+	.mobile.pressed {
+		transform: scale(0.96) translateY(-2px);
+		transition: transform 0.15s cubic-bezier(0.4, 0, 0.6, 1);
+	}
+
+	.mobile.pressed .project-card {
+		box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Desktop press feedback */
+	.pressed:not(.mobile) {
+		transform: scale(0.99) translateY(-6px);
+		transition: transform 0.1s ease-out;
+	}
+
+	/* Navigation state - delightful bounce */
+	.navigating {
+		animation: bounceNavigate 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	}
+
+	.navigating .project-card {
+		box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.2);
+		border-color: #fb923c; /* orange-400 */
+	}
+
+	.navigating .project-image {
+		transform: scale(1.08);
+		transition: transform 0.4s ease-out;
+	}
+
+	@keyframes bounceNavigate {
+		0% { transform: scale(1) translateY(-8px); }
+		50% { transform: scale(1.05) translateY(-15px); }
+		100% { transform: scale(1.02) translateY(-10px); }
+	}
+
+	/* Loading overlay */
+	.loading-overlay {
+		animation: fadeIn 0.2s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	/* Loading spinner */
+	.loading-spinner {
+		width: 32px;
+		height: 32px;
+		border: 3px solid #f3f4f6;
+		border-top: 3px solid #ea580c;
+		border-radius: 50%;
+		animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+		position: relative;
+	}
+	
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	/* Ripple effect for mobile */
+	.ripple-container {
+		border-radius: 1rem;
+	}
+
+	.mobile.pressed .ripple {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		background: radial-gradient(circle, rgba(234, 88, 12, 0.2) 0%, rgba(251, 146, 60, 0.1) 40%, transparent 70%);
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		animation: ripple 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+	}
+
+	@keyframes ripple {
+		0% {
+			width: 0;
+			height: 0;
+			opacity: 1;
+		}
+		100% {
+			width: 400px;
+			height: 400px;
+			opacity: 0;
+		}
+	}
+
+	/* Pulse effect for extra delight */
+	.navigating .project-card::before {
+		content: '';
+		position: absolute;
+		inset: -4px;
+		background: linear-gradient(45deg, #ea580c, #fb923c, #ea580c);
+		border-radius: 1.25rem;
+		z-index: -1;
+		animation: pulse 1s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 0.5; transform: scale(1); }
+		50% { opacity: 0.8; transform: scale(1.02); }
+	}
+
+	/* Utility classes for animations */
+	.arrow-icon {
+		transform: translateX(8px);
+		opacity: 0;
+		transition: all 0.3s ease;
+	}
+
+	.view-text {
+		transform: translateY(4px);
+		opacity: 0;
+		transition: all 0.3s ease;
+	}
+
+	.external-links {
+		opacity: 0.6;
+		transition: opacity 0.3s ease;
+	}
+
+	.project-title {
+		transition: color 0.3s ease;
+	}
+
+	/* Focus styles for accessibility */
+	.group:focus-visible {
+		outline: 2px solid #ea580c;
+		outline-offset: 2px;
+	}
+
+	/* Disable text selection on mobile */
+	.mobile {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+</style>
