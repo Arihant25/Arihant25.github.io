@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	export let data: PageData;
+
+	let { data }: { data: PageData } = $props();
 	const { project } = data;
 
 	let selectedScreenshot: string | null = null;
+	let loadingStates: Record<number, boolean> = $state({});
 
 	function openFullscreen(imageUrl: string) {
 		selectedScreenshot = imageUrl;
@@ -18,6 +20,25 @@
 			closeFullscreen();
 		}
 	}
+
+	function handleImageLoad(index: number) {
+		loadingStates[index] = false;
+	}
+
+	function handleImageError(index: number) {
+		loadingStates[index] = false;
+	}
+
+	// Initialize loading states for all screenshots
+	$effect(() => {
+		if (project.screenshots) {
+			const initialLoadingStates: Record<number, boolean> = {};
+			project.screenshots.forEach((_, index) => {
+				initialLoadingStates[index] = true;
+			});
+			loadingStates = initialLoadingStates;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -170,18 +191,34 @@
 				<div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
 					{#each project.screenshots as screenshot, index}
 						<div
-							class="group inline-block w-fit cursor-pointer justify-self-center overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
+							class="group relative inline-block w-fit cursor-pointer justify-self-center overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
 							on:click={() => openFullscreen(screenshot)}
 							on:keydown={(e) => e.key === 'Enter' && openFullscreen(screenshot)}
 							role="button"
 							tabindex="0"
 							aria-label="View screenshot {index + 1} of {project.name} in fullscreen"
 						>
+							<!-- Loading placeholder -->
+							{#if loadingStates[index]}
+								<div
+									class="loading-placeholder animate-pulse rounded-xl bg-gradient-to-br from-gray-200 to-gray-300"
+								>
+									<div class="flex h-64 w-full items-center justify-center md:h-80">
+										<div class="loading-spinner"></div>
+									</div>
+								</div>
+							{/if}
+
+							<!-- Actual image -->
 							<img
 								src={screenshot}
 								alt={`Screenshot ${index + 1} of {project.name}`}
 								class="block h-auto transition-transform duration-300 group-hover:scale-110"
+								class:opacity-0={loadingStates[index]}
+								class:opacity-100={!loadingStates[index]}
 								loading="lazy"
+								on:load={() => handleImageLoad(index)}
+								on:error={() => handleImageError(index)}
 							/>
 						</div>
 					{/each}
@@ -249,5 +286,64 @@
 	.fixed img {
 		max-height: 90vh; /* Adjust as needed */
 		max-width: 90vw; /* Adjust as needed */
+	}
+
+	/* Loading placeholder styles */
+	.loading-placeholder {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		min-height: 200px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Loading spinner */
+	.loading-spinner {
+		width: 32px;
+		height: 32px;
+		border: 3px solid #f3f4f6;
+		border-top: 3px solid #ea580c;
+		border-radius: 50%;
+		animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Smooth transition for image visibility */
+	img {
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	/* Shimmer animation for placeholder */
+	@keyframes shimmer {
+		0% {
+			background-position: -468px 0;
+		}
+		100% {
+			background-position: 468px 0;
+		}
+	}
+
+	.loading-placeholder::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+		background-size: 468px 100%;
+		animation: shimmer 1.2s ease-in-out infinite;
 	}
 </style>

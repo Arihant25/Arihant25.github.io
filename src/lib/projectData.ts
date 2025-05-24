@@ -64,9 +64,9 @@ export const projects: Project[] = [
         name: "YADA",
         codeUrl: "https://github.com/Arihant25/yada",
         coverImage: "/projects/yada/yada1.png",
-        screenshots: ["https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/UML_Class_Diagram.png?token=GHSAT0AAAAAAC3OBYQN7IX367QAPZSBE65Q2BRN2WA", "https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/adding_basic_food.png?token=GHSAT0AAAAAAC3OBYQMSCGMVXHSNPWVTCMM2BRN3JQ", "https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/adding_food_to_daily_log.png?token=GHSAT0AAAAAAC3OBYQNHM6EMEQLRQ4OBJPY2BRN3SA", "https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/calculating_daily_calorie_summary.png?token=GHSAT0AAAAAAC3OBYQNUW7REFN3IOYWMJOQ2BRN3TA", "https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/creating_composite_food.png?token=GHSAT0AAAAAAC3OBYQM5ZGUS7F2H4FVT5WK2BRN3TQ", "https://raw.githubusercontent.com/Arihant25/YADA/refs/heads/master/diagrams/updating_user_profile.png?token=GHSAT0AAAAAAC3OBYQMWZDBAUMKR7LR5CIU2BRN3UQ"],
+        screenshots: ["/projects/yada/yada2.png", "/projects/yada/yada3.png", "/projects/yada/yada4.png", "/projects/yada/yada5.png", "/projects/yada/yada6.png", "/projects/yada/yada7.png"],
         description: "This was an assignment for the Design and Analysis of Software Systems Spring 2025 course at IIIT-H. We had to make a diet manager app with several features like calorie tracking, meal database management, daily food logs, etc. We also had to make documentation for it in terms of UML diagrams. This was made in collaboration with Mohit Kumar Singh.",
-        shortDescription: "Diet manager in Rust",
+        shortDescription: "Yet Another Diet Assistant in Rust",
         year: 2025,
         technologies: ["Rust"],
         slug: "yada"
@@ -228,10 +228,10 @@ export const projects: Project[] = [
         name: "Class Link Check",
         codeUrl: "https://github.com/AmiMappy/class-link-check",
         deployedUrl: "https://amimappy.github.io/class-link-check/",
-        coverImage: "/projects/class_link_check/clc1.png",
+        coverImage: "/projects/class_link_check/clc1.jpg",
         screenshots: [
-            "https://lh3.googleusercontent.com/LoadbR4vBZTxGp1pP_IEMWRXQ1k8wbTlt8ygdNWmFNlfIH8JSFsDEiYdfCR7bRxWFjR-6BVLJD7Dm2houHMWc15l=s1280-w1280-h800",
-            "https://lh3.googleusercontent.com/xQV1BRZ-Uc6MBoh0kHSyUAME0zsyIWylSVH1tIpzkrXXjUUuclH6MKeTZ36lb1sNIdTm8SLQgLY-lmEl7-0hdgFBjQ=s1280-w1280-h800"
+            "/projects/class_link_check/clc2.jpg",
+            "/projects/class_link_check/clc3.jpg",
         ],
         description: "Class Link Check is a browser extension that monitors your Google Classroom page and notifies you as soon as the online class (Google Meet) link is released. The idea was conceived by my friend AmiMappy, who wrote the JavaScript logic, while I handled the frontend in HTML and CSS, as well as the website and marketing material. This tool was especially helpful during the pandemic, ensuring students never missed the start of an online class by providing timely browser notifications and alerts. It also served as a great introduction to building browser extensions.",
         shortDescription: "A browser extension to notify when online class starts",
