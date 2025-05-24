@@ -12,6 +12,10 @@
 	const release = musicReleases.find((r) => r.slug === slug);
 </script>
 
+<svelte:head>
+	<title>{release ? `${release.title} | Arihant` : 'Music | Arihant'}</title>
+</svelte:head>
+
 {#if release}
 	<div class="mx-auto max-w-7xl p-5 py-12 sm:px-6 lg:px-8">
 		<!-- Back button -->

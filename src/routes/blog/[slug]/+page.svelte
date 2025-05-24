@@ -14,6 +14,10 @@
 	$: htmlContent = marked.parse(blog.content);
 </script>
 
+<svelte:head>
+	<title>{blog.title} | Arihant</title>
+</svelte:head>
+
 <div class="flex min-h-screen w-full flex-col items-center bg-white px-4 py-8 sm:px-8 lg:px-16">
 	<!-- Back Navigation -->
 	<div class="mb-8 w-full max-w-3xl">
@@ -38,7 +42,7 @@
 		</a>
 	</div>
 
-	<h1 class="mb-2 max-w-3xl text-center text-3xl font-bold orange sm:text-4xl lg:text-5xl">
+	<h1 class="orange mb-2 max-w-3xl text-center text-3xl font-bold sm:text-4xl lg:text-5xl">
 		{blog.title}
 	</h1>
 

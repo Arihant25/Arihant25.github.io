@@ -1,13 +1,16 @@
+<!-- filepath: /home/arihanttr/Git/Arihant25.github.io/src/routes/research/+page.svelte -->
 <script lang="ts">
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
+<svelte:head>
+	<title>Research | Arihant</title>
+</svelte:head>
+
 <div class="mx-auto flex flex-col items-center p-4 py-12 sm:px-6 lg:px-8">
-	<h1
-		class="mb-6 w-full text-center text-7xl font-bold sm:text-8xl lg:text-8xl"
-	>
+	<h1 class="mb-6 w-full text-center text-7xl font-bold sm:text-8xl lg:text-8xl">
 		Research<span class="orange">.</span>
 	</h1>
 
