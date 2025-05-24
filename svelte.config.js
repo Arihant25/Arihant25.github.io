@@ -9,7 +9,7 @@ const config = {
 			assets: 'docs'
 		}),
 		paths: {
-			base: ''
+			base: '/Arihant25.github.io'
 		}
 	}
 };
