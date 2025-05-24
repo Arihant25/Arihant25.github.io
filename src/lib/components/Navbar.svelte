@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { slide } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 
 	type NavItem = {
 		href: string;
@@ -90,6 +92,7 @@
 	{#if isMenuOpen}
 		<div
 			class="absolute top-full right-0 left-0 z-20 border-t bg-white pt-2 pb-4 shadow-lg md:hidden"
+			transition:slide={{ duration: 300, easing: cubicOut }}
 		>
 			<ul class="flex flex-col space-y-2 px-4">
 				{#each navItems as item}

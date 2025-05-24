@@ -49,6 +49,18 @@ export const projects: Project[] = [
         slug: "ihs-marks-analyzer"
     },
     {
+        name: "SERC Website",
+        codeUrl: "https://github.com/avi1o1/SERC-Website",
+        deployedUrl: "https://serc.iiit.ac.in/",
+        coverImage: "/projects/serc-website/serc-website1.png",
+        screenshots: ["/projects/serc-website/serc-website2.png", "/projects/serc-website/serc-website3.png", "/projects/serc-website/serc-website4.png", "/projects/serc-website/serc-website5.png"],
+        description: "The previous SERC website was outdated and built with a drag-and-drop editor, which did not reflect the standards of IIIT Hyderabad's premier software engineering lab. Recognizing this, we undertook a complete redesign from the ground up, focusing on modern aesthetics and robust design principles. The result is a visually appealing, user-friendly, and technically sound website that better represents the lab's mission and activities. This project was a collaborative effort with Aviral Gupta and Mohit Kumar Singh.",
+        shortDescription: "Official website of the Software Engineering Research Center",
+        year: 2025,
+        technologies: ["Next.js", "Typescript", "ESLint", "TailwindCSS"],
+        slug: "serc-website"
+    },
+    {
         name: "YADA",
         codeUrl: "https://github.com/Arihant25/yada",
         coverImage: "/projects/yada/yada1.png",
@@ -126,7 +138,7 @@ export const projects: Project[] = [
         name: "AdvantEdge NFS",
         codeUrl: "https://github.com/avi1o1/AdvantEdge",
         coverImage: "/projects/advantedge-nfs/advantedge1.png",
-        screenshots: ["/projects/advantedge-nfs/advantedge2.png","/projects/advantedge-nfs/advantedge3.png",],
+        screenshots: ["/projects/advantedge-nfs/advantedge2.png", "/projects/advantedge-nfs/advantedge3.png",],
         description: "This was the course project of Operating Systems and Networks in Monsoon 2024, at IIIT-H. It is a network file system, that has three components - clients, naming servers, and storage servers. The naming server facilitates the connection between multiple clients and storage servers. This has redundancy built in, so data is backed up across storage servers. It is also scalable and can accommodate a huge number of servers. It can even stream files over the network. This was made in collaboration with Anirudh Sankar, Aviral Gupta, and Mohit Kumar Singh.",
         shortDescription: "A scalable network file system written in C",
         year: 2024,

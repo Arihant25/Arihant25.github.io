@@ -13,3 +13,9 @@ export function load({ params }: { params: { slug: string } }) {
         project
     };
 }
+
+export async function entries() {
+    return projects.map((project) => ({
+        slug: project.slug
+    }));
+}
