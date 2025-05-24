@@ -6,10 +6,11 @@ const config = {
 	kit: {
 		adapter: adapter({
 			pages: 'docs',
-			assets: 'docs'
+			assets: 'docs',
+			fallback: '404.html'
 		}),
 		paths: {
-			base: '/Arihant25.github.io'
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH || ''
 		}
 	}
 };
