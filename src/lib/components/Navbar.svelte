@@ -9,6 +9,9 @@
 	};
 
 	let isMenuOpen = $state(false);
+	let isNavbarVisible = $state(true);
+	let lastScrollY = $state(0);
+	let scrollTimeout: number | undefined;
 
 	const navItems: NavItem[] = [
 		{ href: '/code', label: 'Code' },
@@ -26,16 +29,70 @@
 		isMenuOpen = !isMenuOpen;
 	}
 
+	// Function to handle scroll events
+	function handleScroll() {
+		const currentScrollY = window.scrollY;
+		const scrollDifference = currentScrollY - lastScrollY;
+
+		// Only hide/show navbar if scrolled past a certain threshold (50px from top)
+		if (currentScrollY > 50) {
+			if (scrollDifference > 0 && currentScrollY > lastScrollY) {
+				// Scrolling down - hide navbar
+				isNavbarVisible = false;
+				// Close mobile menu if open when hiding navbar
+				if (isMenuOpen) {
+					isMenuOpen = false;
+				}
+			} else if (scrollDifference < 0) {
+				// Scrolling up - show navbar
+				isNavbarVisible = true;
+			}
+		} else {
+			// Always show navbar when near the top
+			isNavbarVisible = true;
+		}
+
+		lastScrollY = currentScrollY;
+	}
+
+	// Throttled scroll handler
+	function throttledScrollHandler() {
+		if (scrollTimeout) return;
+
+		scrollTimeout = setTimeout(() => {
+			handleScroll();
+			scrollTimeout = undefined;
+		}, 10);
+	}
+
 	// Effect to close menu when route changes
 	$effect(() => {
 		// Reset menu when navigating
 		currentPath;
 		isMenuOpen = false;
 	});
+
+	// Effect to setup scroll listener
+	$effect(() => {
+		if (typeof window !== 'undefined') {
+			window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+
+			return () => {
+				window.removeEventListener('scroll', throttledScrollHandler);
+				if (scrollTimeout) {
+					clearTimeout(scrollTimeout);
+				}
+			};
+		}
+	});
 </script>
 
-<nav class="sticky top-0 z-50 w-full bg-white shadow-sm transition-all duration-300">
-	<div class="mx-auto flex max-w-7xl items-center justify-between p-4">
+<nav
+	class="fixed top-0 z-50 w-full bg-white shadow-sm transition-transform duration-300 ease-in-out"
+	class:translate-y-0={isNavbarVisible}
+	class:-translate-y-full={!isNavbarVisible}
+>
+	<div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
 		<span class="flex items-center gap-4">
 			<img src="/favicon.ico" alt="Logo" class="h-9 w-9" />
 			<a href="/">

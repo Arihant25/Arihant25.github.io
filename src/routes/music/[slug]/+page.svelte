@@ -19,7 +19,7 @@
 {#if release}
 	<div class="mx-auto max-w-7xl p-5 py-12 sm:px-6 lg:px-8">
 		<!-- Back button -->
-		<div class="mb-8 w-full">
+		<div class="my-8 w-full">
 			<a href="/music" class="group flex items-center gap-1 text-gray-700 hover:text-black">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

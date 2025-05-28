@@ -162,10 +162,6 @@
 		transition: transform 0.15s cubic-bezier(0.4, 0, 0.6, 1);
 	}
 
-	.mobile.pressed .blog-card {
-		box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
-	}
-
 	/* Desktop press feedback */
 	.pressed:not(.mobile) {
 		transform: scale(0.99) translateY(-6px);
