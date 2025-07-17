@@ -13,6 +13,51 @@ export interface BlogData {
 export const blogData: BlogData = {
     blogs: [
         {
+            coverImage: 'https://cdn-images-1.medium.com/v2/resize:fit:2000/1*nIW0oS1lqs5g_bH4S2T02Q.png',
+            title: 'Cursor vs Copilot: Let the Results Speak',
+            description: 'A data-driven comparison of AI coding assistants using SWE-Bench Verified.',
+            date: '17 July 2025',
+            slug: 'cursor-vs-copilot',
+            content: `I have been a long-time user of Github Copilot, ever since it became available through the Github Student Developer Pack, where it felt like a small but useful coding speed boost for basic autocomplete scenarios. Over time, the tool evolved from simple Tab completions to a more agentic mode that could handle full tasks, which was heavily inspired by another editor called Cursor. Until recently, I had not properly explored Cursor, mostly because Copilot was good enough for my everyday needs.
+
+Things changed when Copilot introduced a new pricing structure, limiting premium requests to 300 per month and charging extra for additional calls to models like Claude Sonnet and Gemini. At the same time, Copilot had started to feel noticeably sluggish in my workflow. Since I had already heard a lot of positive opinions about Cursor from friends and on social media, I finally decided to give it a serious try to see how it compared.
+
+Right from the start, Cursor felt significantly faster in practice. The design also struck me as more refreshing, partly because I have been staring at the same VS Code interface for years, and the slight change in layout made a surprising difference in how fresh the experience felt. However, the free Tab completions ran out quickly, which was frustrating, but I decided not to rely on gut feelings alone. I wanted to actually measure and compare these AI tools properly, instead of basing my impressions on subjective experience.
+
+## Benchmarking AI Coding Assistants with SWE-Bench Verified
+
+For a meaningful test, I needed a dataset that represents real-world coding tasks rather than toy examples. That is when I turned to SWE-Bench Verified, a benchmark I had seen referenced multiple times in large language model release blog posts. SWE-Bench contains thousands of bugs from real open-source repositories like Django and Sympy, and the Verified subset consists of 500 carefully curated issues selected by OpenAI for quality and realism.
+
+The evaluation process is straightforward but rigorous. Each task consists of a GitHub issue describing a real bug. The AI agent is expected to modify the codebase to resolve it. The changes are captured as a git diff, which is saved as the system's prediction. After generating all the diffs, each patch is individually applied to the base repository, and the project's test suite is executed. If all tests pass, the issue is considered resolved. Otherwise, it counts as a failure.
+
+## Automating the Test Pipeline
+
+To run the experiment efficiently, I wrote a Python script that uses multiple parallel threads to open both editors, retrieve the bug descriptions from the dataset, and paste them into the AI input panes of each tool. The agents then perform the fix autonomously and signal completion by creating a file called fixed.txt. Once the task is marked as done, the script collects the git diff, resets the repository to its original state, and proceeds to the next task in the list.
+
+For this comparison, I used Github Copilot configured with the GPT 4.1 model, while Cursor ran in Auto mode, which are their default settings and are available without requiring a paid subscription.
+
+## The Results: Cursor Is Faster, Copilot Solves More Bugs
+
+After completing all 500 SWE-Bench Verified tasks with both agents, the results came in as follows.
+
+Cursor was noticeably faster, finishing tasks in an average of 62.95 seconds compared to Copilot's 89.91 seconds. This matches the initial impression I had during day-to-day usage where Cursor felt more responsive and lightweight. However, in terms of successful resolutions, Copilot came out ahead by solving 283 of the tasks, whereas Cursor successfully resolved 258. This translates to a 56.5 percent resolution rate for Copilot, versus 51.7 percent for Cursor.
+
+Both systems encountered one agentic error each, where the AI failed to produce any meaningful fix or output. However, Copilot had an additional issue where it sometimes generated empty patches (essentially submitting a diff that made no changes to the codebase). This happened four times in my run, when GPT 4.1 kept reading the same file over and over again and time out after 15 mins. Cursor, by contrast, never submitted an empty patch, which suggests it is more inclined to at least attempt a solution, even if that solution occasionally does not work.
+
+![A graph of the results](https://cdn-images-1.medium.com/v2/resize:fit:2000/1*nIW0oS1lqs5g_bH4S2T02Q.png)
+
+## What This Means
+
+If your primary concern is raw speed and you prefer an AI coding assistant that consistently returns some output for every task, even if it is sometimes incorrect, Cursor provides a better experience. On the other hand, if your goal is to maximize the number of successful resolutions, Copilot remains slightly ahead, although it occasionally returns nothing at all for certain tasks.
+
+## A Note on Windsurf
+
+As a side experiment, I also tried running Windsurf on the same benchmark. Integrating it into my script proved challenging because it frequently threw errors like invalid tool calls and claimed the fixed.txt file already existed, preventing new task completions. Despite these issues, I managed to get Windsurf to run for 90 test cases. I have not yet processed the evaluation for Windsurf, but if you are interested, feel free to run the rest of the benchmark and submit a pull request to the repository.
+
+You can find the code and results here:
+[https://github.com/Arihant25/mayday](https://github.com/Arihant25/mayday)`,
+        },
+        {
             coverImage: 'https://img.freepik.com/free-vector/pencil-round-smooth-style_78370-7571.jpg?semt=ais_hybrid&w=740',
             title: 'I, Pencil',
             description: 'A pencil has something to say.',
