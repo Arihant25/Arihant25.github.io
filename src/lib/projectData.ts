@@ -13,6 +13,24 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        name: "Streaks",
+        codeUrl: "https://github.com/Arihant25/Streaks",
+        deployedUrl: "https://play.google.com/store/apps/details?id=com.arihant.streaks",
+        coverImage: "/projects/streaks/streaks.png",
+        screenshots: [
+            "/projects/streaks/1.png",
+            "/projects/streaks/2.png",
+            "/projects/streaks/3.png",
+            "/projects/streaks/4.png",
+            "/projects/streaks/5.png"
+        ],
+        description: "Streaks is a minimalist habit tracker designed for privacy and personalization. Not having any previous experience working with native Android apps, I originally started this as an experiment just to see how far I could get with AI. I also needed such an app for myself, but the ones on the Play Store usually missed some crucial feature, had dated UIs, or were too expensive. Hence, I made my own. ",
+        shortDescription: "Minimalist, private habit tracker with home screen widget and full personalization.",
+        year: 2025,
+        technologies: ["Kotlin", "Android Studio"],
+        slug: "streaks"
+    },
+    {
         name: "boxed",
         codeUrl: "https://github.com/Arihant25/boxed",
         deployedUrl: "https://arihant25.github.io/boxed/",
