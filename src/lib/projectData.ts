@@ -13,6 +13,22 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        name: "LeetCode Tracker",
+        codeUrl: "https://github.com/Arihant25/leetcode-tracker",
+        deployedUrl: "https://leetcode-tracker-lemon.vercel.app",
+        coverImage: "/projects/leetcode-tracker/leetcode-tracker1.png",
+        screenshots: [
+            "/projects/leetcode-tracker/leetcode-tracker2.png",
+            "/projects/leetcode-tracker/leetcode-tracker3.png",
+            "/projects/leetcode-tracker/leetcode-tracker4.png",
+        ],
+        description: "I used to keep track of every LeetCode problem I solved in a Google Sheet, thinking it would help me stay organized and consistent. It worked for a while, but over time, the process became frustrating, especially when I had to manually check for duplicates every time I added something new. What started as a simple system quickly turned into a tedious chore.\n\nOne day, when I was planning to get back into solving problems, I did what any seasoned procrastinator would do—I decided to build a tool instead. Writing code to avoid writing code seemed strangely satisfying, and so I went with it.\n\nI put together a quick version using Gemini CLI, and whenever I ran into something that felt too annoying to figure out alone, I asked Claude or used Copilot to nudge me in the right direction. A few sessions later, it was actually working the way I wanted.\n\nWhat began as a detour from practicing ended up becoming a small but useful project. It has already made my own life easier, and if you're anything like me, it might make yours a little easier too.\n\nSomething new I tried for this project is internationalization (i18n). I used the Next.js i18n routing feature to make it available in multiple languages, and it was surprisingly straightforward. The app is currently available in English, Hindi, French, Japanese, and Chinese.",
+        shortDescription: "A tool to track your LeetCode progress and revision",
+        year: 2025,
+        technologies: ["Next.js", "TypeScript", "TailwindCSS", "MongoDB"],
+        slug: "leetcode-tracker"
+    },
+    {
         name: "Streaks",
         codeUrl: "https://github.com/Arihant25/Streaks",
         deployedUrl: "https://play.google.com/store/apps/details?id=com.arihant.streaks",
