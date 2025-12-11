@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
 	// @ts-ignore - page-flip doesn't have TypeScript definitions
 	import * as PageFlipModule from 'page-flip';
+	import 'page-flip/src/Style/stPageFlip.css';
 	import WaveSurfer from 'wavesurfer.js';
 
 	let { data }: { data: PageData } = $props();
@@ -20,6 +22,8 @@
 
 	// Determine available paper pages
 	onMount(async () => {
+		if (!browser) return;
+
 		// Play tudum sound when page loads
 		const tudumSound = new Audio('/audio/tudum.mp3');
 		tudumSound.volume = 0.3;
@@ -45,12 +49,12 @@
 
 	// Initialize flipbook when paperPages are loaded and container is ready
 	$effect(() => {
-		if (paperPages.length > 0 && flipBookContainer) {
-			// Use setTimeout to ensure DOM is fully updated
-			setTimeout(() => {
-				initializeFlipBook();
-			}, 0);
-		}
+		if (!browser || paperPages.length === 0 || !flipBookContainer) return;
+		
+		// Use setTimeout to ensure DOM is fully updated
+		setTimeout(() => {
+			initializeFlipBook();
+		}, 0);
 	});
 
 	function playFlipSound() {
@@ -61,7 +65,7 @@
 	}
 
 	function initializeFlipBook() {
-		if (!flipBookContainer) return;
+		if (!browser || !flipBookContainer) return;
 
 		// Clean up existing instance if any
 		if (pageFlip) {
@@ -130,7 +134,7 @@
 	}
 
 	function initializeAudioPlayer() {
-		if (!waveformContainer) return;
+		if (!browser || !waveformContainer) return;
 
 		const audioPath = `/research/papers/${paper.slug}/${paper.audioSummary}`;
 
