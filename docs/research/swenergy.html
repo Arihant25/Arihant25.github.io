@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="../favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description"
+		content="Arihant's personal website featuring blog posts, coding projects, music covers, photos, and research work." />
+	<title>Arihant's Corner</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<script>
+		// Initialize dark mode before page renders to prevent flash
+		(function () {
+			const stored = localStorage.getItem('darkMode');
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const darkMode = stored !== null ? stored === 'true' : prefersDark;
+			if (darkMode) {
+				document.documentElement.classList.add('dark');
+			}
+		})();
+	</script>
+	
+		<link rel="modulepreload" href="../_app/immutable/entry/start.DrrYEdRD.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C3yC16e3.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DolwoacR.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B-cB4yTN.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/C2DXILat.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DiLpMv4m.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CYgJF_JY.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BNWbS4Wg.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.CnlP6Mdh.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CWj6FrbW.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/gi9K7tYo.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BSlyI9sH.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BAHqQ8zZ.js">
+</head>
+
+<body data-sveltekit-preload-data="hover">
+	<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1ho6hrv = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.DrrYEdRD.js"),
+						import("../_app/immutable/entry/app.CnlP6Mdh.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+</body>
+
+</html>
