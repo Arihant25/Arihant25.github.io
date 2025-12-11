@@ -123,13 +123,13 @@
 
 	<!-- QUOTE OF THE DAY -->
 	<div
-		class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto"
+		class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto dark:bg-slate-900"
 	>
 		<div
 			class="font-ibm-plex-serif orange absolute -top-9 left-4 text-9xl font-black"
 			aria-hidden="true"
 		>
-			“
+			"
 		</div>
 		<p
 			class="font-ibm-plex-serif relative z-10 text-center text-2xl leading-relaxed text-white italic"

@@ -5,8 +5,22 @@
 	<meta charset="utf-8" />
 	<link rel="icon" href="%sveltekit.assets%/favicon.ico" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description"
+		content="Arihant's personal website featuring blog posts, coding projects, music covers, photos, and research work." />
+	<title>Arihant's Corner</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<script>
+		// Initialize dark mode before page renders to prevent flash
+		(function () {
+			const stored = localStorage.getItem('darkMode');
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const darkMode = stored !== null ? stored === 'true' : prefersDark;
+			if (darkMode) {
+				document.documentElement.classList.add('dark');
+			}
+		})();
+	</script>
 	%sveltekit.head%
 </head>
 

@@ -5,7 +5,10 @@
 	let { children } = $props();
 </script>
 
-<div class="flex min-h-screen flex-col">
+<div
+	class="grid-bg flex min-h-screen flex-col"
+	style="background-color: var(--bg-primary); color: var(--text-primary);"
+>
 	<Navbar />
 	<main class="flex-1">
 		{@render children()}

@@ -3,25 +3,91 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-    --font-ibm-plex-serif: 'IBM Plex Serif', serif;
-    --font-inter: 'Inter', sans-serif;
-    --font-space-mono: 'Space Mono', monospace;
+  --font-ibm-plex-serif: 'IBM Plex Serif', serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+}
+
+/* Light mode (default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #374151;
+  --text-muted: #9ca3af;
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-hover-bg: #f9fafb;
+  --grid-color: rgba(0, 0, 0, 0.03);
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --code-bg: #f9fafb;
+}
+
+/* Dark mode */
+:root.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --border-light: #475569;
+  --nav-bg: #1e293b;
+  --card-bg: #1e293b;
+  --card-hover-bg: #334155;
+  --grid-color: rgba(255, 255, 255, 0.05);
+  --overlay-bg: rgba(15, 23, 42, 0.9);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --code-bg: #1e293b;
+}
+
+/* View Transition API for theme switching */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
 }
 
 body {
-    font-family: var(--font-inter);
+  font-family: var(--font-inter);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Engineering grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
 }
 
 h1 {
-    font-family: var(--font-ibm-plex-serif);
+  font-family: var(--font-ibm-plex-serif);
 }
 
 .orange {
-    color: #FF5722;
+  color: #FF5722;
 }
 
 .bg-orange {
-    background-color: #FF5722;
+  background-color: #FF5722;
 }
 
 /* Add underline animation for navbar links */
@@ -29,6 +95,7 @@ h1 {
   position: relative;
   overflow: hidden;
 }
+
 .nav-underline::after {
   content: '';
   position: absolute;
@@ -37,8 +104,9 @@ h1 {
   width: 0%;
   height: 2px;
   background: currentColor;
-  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .nav-underline:hover::after,
 .nav-underline:focus-visible::after {
   width: 100%;

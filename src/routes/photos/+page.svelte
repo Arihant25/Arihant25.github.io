@@ -27,8 +27,8 @@
 		<!-- Empty state -->
 		<div class="flex flex-col items-center justify-center py-20 text-center">
 			<div class="mb-4 text-6xl opacity-20">📷</div>
-			<h2 class="mb-2 text-2xl font-semibold text-gray-700">No photos yet</h2>
-			<p class="text-gray-500">
+			<h2 class="mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-300">No photos yet</h2>
+			<p class="text-gray-500 dark:text-gray-400">
 				Photos will appear here once they're uploaded to the static/photos folder.
 			</p>
 		</div>

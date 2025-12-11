@@ -31,7 +31,7 @@
 	<!-- Loading Overlay -->
 	{#if isLoading}
 		<div
-			class="loading-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-gray-100"
+			class="loading-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-700"
 		>
 			<div class="loading-spinner"></div>
 		</div>

@@ -20,7 +20,10 @@
 	<div class="mx-auto max-w-7xl p-5 py-12 sm:px-6 lg:px-8">
 		<!-- Back button -->
 		<div class="my-8 w-full">
-			<a href="/music" class="group flex items-center gap-1 text-gray-700 hover:text-black">
+			<a
+				href="/music"
+				class="group flex items-center gap-1 text-gray-700 hover:text-black dark:text-white dark:hover:text-white"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
@@ -41,7 +44,7 @@
 
 		<!-- Header with title and release info -->
 		<div class="mb-10">
-			<h1 class="text-4xl font-bold md:text-5xl lg:text-6xl">{release.title}</h1>
+			<h1 class="text-4xl font-bold md:text-5xl lg:text-6xl dark:text-white">{release.title}</h1>
 			<div class="mt-8 flex items-center">
 				<span class="mr-4 text-xl font-semibold text-orange-500">{release.year}</span>
 				<div class="rounded border border-orange-500 px-3 py-1 text-sm text-orange-500">
@@ -54,13 +57,15 @@
 		<div class="flex flex-col gap-8 lg:flex-row">
 			<!-- About this release -->
 			<div class="w-full lg:w-1/3">
-				<h2 class="mb-4 text-2xl font-semibold">About this release</h2>
-				<p class="leading-relaxed text-gray-700">{release.extendedDescription}</p>
+				<h2 class="mb-4 text-2xl font-semibold dark:text-white">About this release</h2>
+				<p class="leading-relaxed dark:text-gray-200">
+					{release.extendedDescription}
+				</p>
 			</div>
 
 			<!-- Spotify embed -->
 			<div class="w-full lg:w-2/3">
-				<h2 class="mb-4 text-2xl font-semibold">Listen</h2>
+				<h2 class="mb-4 text-2xl font-semibold dark:text-white">Listen</h2>
 				<div class="overflow-hidden rounded-lg">
 					<iframe
 						src={release.spotifyEmbed}
@@ -78,8 +83,8 @@
 	</div>
 {:else}
 	<div class="mx-auto flex flex-col items-center p-4 py-12 sm:px-6 lg:px-8">
-		<h1 class="mb-4 text-4xl font-bold">Release Not Found</h1>
-		<p class="mb-8">The music release you're looking for doesn't exist.</p>
+		<h1 class="mb-4 text-4xl font-bold dark:text-white">Release Not Found</h1>
+		<p class="mb-8 dark:text-white">The music release you're looking for doesn't exist.</p>
 		<a href="/music" class="text-orange-500 hover:text-orange-600"> Return to Music </a>
 	</div>
 {/if}

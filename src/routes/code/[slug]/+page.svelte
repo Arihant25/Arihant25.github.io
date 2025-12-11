@@ -51,7 +51,7 @@
 	<div class="mx-auto max-w-6xl p-5 sm:px-6 lg:px-8">
 		<a
 			href="/code"
-			class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900"
+			class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
 		>
 			<svg
 				class="h-4 w-4 transition-transform group-hover:-translate-x-1"
@@ -79,7 +79,7 @@
 					<h1 class="font-ibm-plex-serif mb-4 text-6xl leading-tight font-bold">
 						{project.name}<span class="orange">.</span>
 					</h1>
-					<p class="max-w-2xl text-xl leading-relaxed font-light text-gray-700">
+					<p class="max-w-2xl text-xl leading-relaxed font-light">
 						{project.shortDescription}
 					</p>
 				</div>
@@ -87,13 +87,13 @@
 				<!-- Project Meta Info -->
 				<div class="mb-12 flex flex-wrap items-center gap-6 text-lg">
 					<div class="flex items-center space-x-2">
-						<span class="font-semibold text-gray-900">Year:</span>
+						<span class="font-semibold text-gray-900 dark:text-gray-200">Year:</span>
 						<span class="font-light">{project.year}</span>
 					</div>
 
 					{#if project.technologies && project.technologies.length > 0}
 						<div class="flex items-center space-x-3">
-							<span class="font-semibold text-gray-900">Built with:</span>
+							<span class="font-semibold">Built with:</span>
 							<div class="flex flex-wrap gap-2">
 								{#each project.technologies as tech}
 									<span
@@ -137,7 +137,7 @@
 							href={project.codeUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="group inline-flex items-center space-x-2 rounded-lg border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 transition-all duration-200 hover:border-gray-400 hover:shadow-md"
+							class="group inline-flex items-center space-x-2 rounded-lg border-2 border-gray-300 px-6 py-3 font-semibold transition-all duration-200 hover:border-gray-400 hover:shadow-md dark:border-gray-600 dark:hover:border-gray-500"
 						>
 							<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
 								<path
@@ -177,8 +177,8 @@
 	<div class="mx-auto max-w-6xl p-5 sm:px-6 lg:px-8">
 		<div class="mb-16">
 			<h2 class="mb-6 text-3xl font-bold">About this project</h2>
-			<div class="prose prose-lg max-w-none">
-				<p class="text-justify text-lg leading-relaxed font-light text-gray-700">
+			<div class="max-w-none">
+				<p class="mb-6 text-justify text-lg leading-relaxed font-light">
 					{project.description}
 				</p>
 			</div>
@@ -256,10 +256,10 @@
 		{/if}
 
 		<!-- Bottom Navigation -->
-		<div class="border-t border-gray-200 pt-8 text-center">
+		<div class="border-t border-gray-200 pt-8 text-center dark:border-gray-700">
 			<a
 				href="/code"
-				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-orange-600"
+				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-orange-600 dark:text-gray-400 dark:hover:text-orange-500"
 			>
 				<svg
 					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
@@ -281,10 +281,6 @@
 </div>
 
 <style>
-	.prose p {
-		margin-bottom: 1.5rem;
-	}
-
 	/* Ensure the modal image doesn't exceed viewport and maintains aspect ratio */
 	.fixed img {
 		max-height: 90vh; /* Adjust as needed */

@@ -128,8 +128,8 @@
 
 	<!-- Description text -->
 	<div class="mt-4 text-center">
-		<h3 class="text-lg font-semibold">{title}</h3>
-		<p class="mt-1 text-sm">{description}</p>
+		<h3 class="text-lg font-semibold dark:text-white">{title}</h3>
+		<p class="mt-1 text-sm dark:text-white">{description}</p>
 	</div>
 </a>
 

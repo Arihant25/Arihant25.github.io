@@ -40,9 +40,12 @@
 		isNavigating = true;
 
 		// Navigate after a delightful delay
-		setTimeout(() => {
-			goto(`/blog/${blog.slug}`);
-		}, isMobile ? 400 : 200);
+		setTimeout(
+			() => {
+				goto(`/blog/${blog.slug}`);
+			},
+			isMobile ? 400 : 200
+		);
 	}
 
 	function handleReadMore() {
@@ -82,7 +85,7 @@
 
 <div
 	bind:this={cardElement}
-	class="blog-card relative mx-auto flex w-full max-w-md transform flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 ease-in-out cursor-pointer select-none"
+	class="blog-card relative mx-auto flex h-full w-full max-w-md transform cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lg transition-all duration-300 ease-in-out select-none dark:border-slate-700 dark:bg-slate-800"
 	class:pressed={isPressed}
 	class:navigating={isNavigating}
 	class:mobile={isMobile}
@@ -98,27 +101,38 @@
 >
 	<!-- Loading Overlay -->
 	{#if isNavigating}
-		<div class="loading-overlay absolute inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-2xl">
+		<div
+			class="loading-overlay absolute inset-0 z-50 flex items-center justify-center rounded-2xl bg-white/90 backdrop-blur-sm dark:bg-slate-900/90"
+		>
 			<div class="loading-spinner"></div>
 		</div>
 	{/if}
 
 	<!-- Ripple Effect for Touch -->
-	<div class="ripple-container absolute inset-0 overflow-hidden pointer-events-none rounded-2xl">
+	<div class="ripple-container pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
 		<div class="ripple"></div>
 	</div>
 
 	<div class="blog-image-container relative h-auto w-full">
-		<img src={blog.coverImage} alt={blog.title} class="blog-image h-52 w-full rounded-xl object-cover transition-transform duration-700" loading="lazy" />
-		
+		<img
+			src={blog.coverImage}
+			alt={blog.title}
+			class="blog-image h-52 w-full rounded-xl object-cover transition-transform duration-700"
+			loading="lazy"
+		/>
+
 		<!-- Gradient Overlay -->
 		<div
-			class="overlay absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 rounded-xl"
+			class="overlay absolute inset-0 rounded-xl bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300"
 		></div>
 	</div>
-	<h3 class="blog-title py-4 text-2xl font-semibold text-slate-800 transition-colors duration-300">{blog.title}</h3>
-	<span class="text-sm text-slate-500">{blog.date}</span>
-	<p class="py-4 text-base text-slate-600">{blog.description}</p>
+	<h3
+		class="blog-title py-4 text-2xl font-semibold text-slate-800 transition-colors duration-300 dark:text-slate-100"
+	>
+		{blog.title}
+	</h3>
+	<span class="text-sm text-slate-500 dark:text-slate-400">{blog.date}</span>
+	<p class="py-4 text-base text-slate-600 dark:text-slate-300">{blog.description}</p>
 	<div class="mt-auto flex items-center justify-end pt-4 text-base">
 		<button
 			class="read-more-btn focus:ring-opacity-50 bg-orange cursor-pointer rounded-lg px-5 py-2.5 text-base font-medium text-white transition-all duration-200 ease-in-out focus:ring-2 focus:outline-none"
@@ -184,9 +198,15 @@
 	}
 
 	@keyframes bounceNavigate {
-		0% { transform: scale(1) translateY(-8px); }
-		50% { transform: scale(1.05) translateY(-15px); }
-		100% { transform: scale(1.02) translateY(-10px); }
+		0% {
+			transform: scale(1) translateY(-8px);
+		}
+		50% {
+			transform: scale(1.05) translateY(-15px);
+		}
+		100% {
+			transform: scale(1.02) translateY(-10px);
+		}
 	}
 
 	/* Loading overlay */
@@ -195,8 +215,12 @@
 	}
 
 	@keyframes fadeIn {
-		from { opacity: 0; }
-		to { opacity: 1; }
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 
 	/* Loading spinner */
@@ -208,11 +232,15 @@
 		border-radius: 50%;
 		animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 		position: relative;
-	} 
+	}
 
 	@keyframes spin {
-		0% { transform: rotate(0deg); }
-		100% { transform: rotate(360deg); }
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
 	}
 
 	/* Ripple effect for mobile */
@@ -222,7 +250,12 @@
 		left: 50%;
 		width: 0;
 		height: 0;
-		background: radial-gradient(circle, rgba(234, 88, 12, 0.2) 0%, rgba(251, 146, 60, 0.1) 40%, transparent 70%);
+		background: radial-gradient(
+			circle,
+			rgba(234, 88, 12, 0.2) 0%,
+			rgba(251, 146, 60, 0.1) 40%,
+			transparent 70%
+		);
 		border-radius: 50%;
 		transform: translate(-50%, -50%);
 		animation: ripple 0.6s cubic-bezier(0.4, 0, 0.6, 1);
@@ -253,8 +286,15 @@
 	}
 
 	@keyframes pulse {
-		0%, 100% { opacity: 0.5; transform: scale(1); }
-		50% { opacity: 0.8; transform: scale(1.02); }
+		0%,
+		100% {
+			opacity: 0.5;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 0.8;
+			transform: scale(1.02);
+		}
 	}
 
 	/* Read more button animations */
