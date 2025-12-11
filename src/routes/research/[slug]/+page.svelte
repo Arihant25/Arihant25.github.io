@@ -2,8 +2,6 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 	import type { PageData } from './$types';
-	// @ts-ignore - page-flip doesn't have TypeScript definitions
-	import * as PageFlipModule from 'page-flip';
 	import 'page-flip/src/Style/stPageFlip.css';
 	import WaveSurfer from 'wavesurfer.js';
 
@@ -12,6 +10,7 @@
 
 	let flipBookContainer: HTMLDivElement;
 	let pageFlip: any;
+	let PageFlipClass: any;
 	let wavesurfer: WaveSurfer | null = null;
 	let waveformContainer: HTMLDivElement;
 	let isPlaying = $state(false);
@@ -23,6 +22,10 @@
 	// Determine available paper pages
 	onMount(async () => {
 		if (!browser) return;
+
+		// Dynamically import page-flip
+		const PageFlipModule = await import('page-flip');
+		PageFlipClass = PageFlipModule.PageFlip || (PageFlipModule as any).default;
 
 		// Play tudum sound when page loads
 		const tudumSound = new Audio('/audio/tudum.mp3');
@@ -49,8 +52,8 @@
 
 	// Initialize flipbook when paperPages are loaded and container is ready
 	$effect(() => {
-		if (!browser || paperPages.length === 0 || !flipBookContainer) return;
-		
+		if (paperPages.length === 0 || !flipBookContainer) return;
+
 		// Use setTimeout to ensure DOM is fully updated
 		setTimeout(() => {
 			initializeFlipBook();
@@ -65,7 +68,9 @@
 	}
 
 	function initializeFlipBook() {
-		if (!browser || !flipBookContainer) return;
+		if (!browser || !flipBookContainer || !PageFlipClass) {
+			return;
+		}
 
 		// Clean up existing instance if any
 		if (pageFlip) {
@@ -74,9 +79,7 @@
 
 		const isMobile = window.innerWidth < 768;
 
-		// @ts-ignore
-		const PageFlip = PageFlipModule.default || PageFlipModule.PageFlip || PageFlipModule;
-		pageFlip = new PageFlip(flipBookContainer, {
+		pageFlip = new PageFlipClass(flipBookContainer, {
 			width: isMobile ? window.innerWidth - 40 : 550,
 			height: isMobile ? (window.innerWidth - 40) * 1.414 : 733,
 			size: 'stretch',
