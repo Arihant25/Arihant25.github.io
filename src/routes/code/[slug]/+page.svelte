@@ -46,32 +46,34 @@
 	<meta name="description" content={project.shortDescription} />
 </svelte:head>
 
-<div class="md:mx-4">
+<div>
 	<!-- Back Navigation -->
-	<div class="mx-auto max-w-6xl p-5 sm:px-6 lg:px-8">
-		<a
-			href="/code"
-			class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-		>
-			<svg
-				class="h-4 w-4 transition-transform group-hover:-translate-x-1"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
+	<div class="mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-6 lg:px-8">
+		<div class="mb-8">
+			<a
+				href="/code"
+				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
 			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M10 19l-7-7m0 0l7-7m-7 7h18"
-				></path>
-			</svg>
-			<span class="text-sm font-medium">Back to Projects</span>
-		</a>
+				<svg
+					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M10 19l-7-7m0 0l7-7m-7 7h18"
+					></path>
+				</svg>
+				<span class="text-sm font-medium">Back to Projects</span>
+			</a>
+		</div>
 	</div>
 
 	<!-- Hero Section -->
-	<div class="mx-auto max-w-6xl p-5 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 		<div class="mb-16 grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
 			<!-- Left Column - Hero Content -->
 			<div>
@@ -174,7 +176,7 @@
 	</div>
 
 	<!-- Project Description -->
-	<div class="mx-auto max-w-6xl p-5 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 		<div class="mb-16">
 			<h2 class="mb-6 text-3xl font-bold">About this project</h2>
 			<div class="max-w-none">
@@ -254,29 +256,6 @@
 				</button>
 			</div>
 		{/if}
-
-		<!-- Bottom Navigation -->
-		<div class="border-t border-gray-200 pt-8 text-center dark:border-gray-700">
-			<a
-				href="/code"
-				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-orange-600 dark:text-gray-400 dark:hover:text-orange-500"
-			>
-				<svg
-					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M10 19l-7-7m0 0l7-7m-7 7h18"
-					></path>
-				</svg>
-				<span class="font-medium">Explore more projects</span>
-			</a>
-		</div>
 	</div>
 </div>
 

@@ -17,28 +17,27 @@
 </svelte:head>
 
 {#if release}
-	<div class="mx-auto max-w-7xl p-5 py-12 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-6 lg:px-8">
 		<!-- Back button -->
-		<div class="my-8 w-full">
+		<div class="mb-8">
 			<a
 				href="/music"
-				class="group flex items-center gap-1 text-gray-700 hover:text-black dark:text-white dark:hover:text-white"
+				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
 			>
 				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
+					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
 					fill="none"
-					viewBox="0 0 24 24"
 					stroke="currentColor"
+					viewBox="0 0 24 24"
 				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						stroke-width="2"
-						d="M15 19l-7-7 7-7"
-					/>
+						d="M10 19l-7-7m0 0l7-7m-7 7h18"
+					></path>
 				</svg>
-				Back to Music
+				<span class="text-sm font-medium">Back to Music</span>
 			</a>
 		</div>
 

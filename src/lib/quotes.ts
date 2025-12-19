@@ -24,7 +24,6 @@ const quotes = [
     'ADHD is like a superpower - it amplifies whatever you do exponentially. So wield it carefully.',
     "Don\'t ignore your dreams; don\'t work too much; say what you think; cultivate friendships; be happy.",
     'We win because we are determined and disciplined. Not because we are superior.',
-    'We will fight it, because we are frightened if it.',
     'Something that feels like play to you might look like work to others.',
     'Escape competition through authenticity.',
     'Informal language is the athletic clothing of ideas.',
@@ -35,7 +34,17 @@ const quotes = [
     'Always keep learning, whether at work or in relationships.',
     "Don\'t wrestle with the air.",
     "Every act of conscious learning requires the willingness to suffer an injury to one\'s self-esteem. That is why young children, before they are aware of their own self-importance, learn so easily; and why older persons, especially if vain or important, cannot learn at all.",
-    "It\'s dark because you are trying too hard. Lightly child, lightly. Learn to do everything lightly. Yes, feel lightly even though you\'re feeling deeply."
+    "It\'s dark because you are trying too hard. Lightly child, lightly. Learn to do everything lightly. Yes, feel lightly even though you\'re feeling deeply.",
+    "Everything that happens to you, everything that you feel, everything that happens in the universe, it\'s all just chemical changes and physical movement of electrons and neurons, etc.",
+    "I used to think I wanted to know everything. Now I know I don\'t.",
+    "Hate is just a glowing coal that we carry inside us, that burns us from the inside while people have no idea about it on the outside. The sooner we dispose of it, the better. Before it burns and scars us forever. It doesn\'t burn the person we hate, it only burns us.",
+    'High performers usually use discipline as the very last resort.',
+    "When you brag about yourself, you\'re also telling yourself that you-as-you-are, is not good enough for other people.",
+    'To "embrace the absurd" in our lives doesn\'t mean pretending the absurd isn\'t there, or sugarcoating it with fake meanings. It means: Acknowledging that life has no ultimate purpose or guarantee. Rejecting escape routes like imagining some higher metaphysical justification. Living intensely anyway—finding joy in experiences, creativity, love, beauty, work, even though they aren\'t backed by cosmic meaning. Owning your fate: like Sisyphus pushing his rock, choosing to keep going not because the task has meaning, but because you choose it.',
+    'Chasing obsession is the fastest way to become a high performer.',
+    'If years were letters, the average human lifespan would not be longer than this sentence.',
+    'Life is always about tradeoffs and change.',
+    'I think the purpose of being human is expansion of consciousness, and not just learning abstractions and having diverse sense experience, but also practicing skills and sharing space with other beings.'
 ];
 
 export default quotes;

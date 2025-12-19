@@ -232,16 +232,15 @@
 </svelte:head>
 
 <div
-	class="grid-bg min-h-screen px-4 py-16 sm:py-20"
+	class="grid-bg min-h-screen"
 	style="background-color: var(--bg-primary); color: var(--text-primary);"
 >
-	<div class="mx-auto max-w-7xl">
-		<!-- Header -->
-		<div class="mb-12">
+	<div class="mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-6 lg:px-8">
+		<!-- Back button -->
+		<div class="mb-8">
 			<a
 				href="/research"
-				class="group my-8 inline-flex items-center space-x-2 transition-colors duration-200"
-				style="color: var(--text-secondary);"
+				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
 			>
 				<svg
 					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
@@ -258,6 +257,10 @@
 				</svg>
 				<span class="text-sm font-medium">Back to Research</span>
 			</a>
+		</div>
+
+		<!-- Header -->
+		<div>
 			<h1
 				class="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl"
 				style="font-family: var(--font-ibm-plex-serif); color: var(--text-primary);"

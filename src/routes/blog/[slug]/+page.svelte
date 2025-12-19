@@ -19,48 +19,54 @@
 </svelte:head>
 
 <div
-	class="grid-bg flex min-h-screen w-full flex-col items-center px-4 py-8 sm:px-8 lg:px-16"
+	class="grid-bg flex min-h-screen w-full flex-col items-center"
 	style="background-color: var(--bg-primary); color: var(--text-primary);"
 >
 	<!-- Back Navigation -->
-	<div class="mb-8 w-full max-w-3xl">
-		<a
-			href="/blog"
-			class="group inline-flex items-center space-x-2 transition-colors duration-200"
-			style="color: var(--text-secondary);"
-		>
-			<svg
-				class="h-4 w-4 transition-transform group-hover:-translate-x-1"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
+	<div class="w-full max-w-3xl px-5 pt-20 sm:px-6 lg:px-8">
+		<div class="mb-8">
+			<a
+				href="/blog"
+				class="group inline-flex items-center space-x-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
 			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M10 19l-7-7m0 0l7-7m-7 7h18"
-				></path>
-			</svg>
-			<span class="text-sm font-medium">Back to Blog</span>
-		</a>
+				<svg
+					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M10 19l-7-7m0 0l7-7m-7 7h18"
+					></path>
+				</svg>
+				<span class="text-sm font-medium">Back to Blog</span>
+			</a>
+		</div>
 	</div>
 
-	<h1 class="orange mb-2 max-w-3xl text-center text-3xl font-bold sm:text-4xl lg:text-5xl">
+	<h1
+		class="orange mb-2 max-w-3xl px-5 text-center text-3xl font-bold sm:px-6 sm:text-4xl lg:px-8 lg:text-5xl"
+	>
 		{blog.title}
 	</h1>
 
-	<span class="mb-4 max-w-3xl text-center text-sm" style="color: var(--text-secondary);">
+	<span
+		class="mb-4 max-w-3xl px-5 text-center text-sm sm:px-6 lg:px-8"
+		style="color: var(--text-secondary);"
+	>
 		{blog.date}
 	</span>
 
 	<hr
-		class="my-8 w-full max-w-3xl border-t border-none"
+		class="my-8 w-full max-w-3xl border-t border-none px-5 sm:px-6 lg:px-8"
 		style="border-color: var(--border-color);"
 	/>
 
 	<div
-		class="blog-content prose prose-lg w-full max-w-3xl text-justify text-lg leading-relaxed"
+		class="blog-content prose prose-lg w-full max-w-3xl px-5 text-justify text-lg leading-relaxed sm:px-6 lg:px-8"
 		bind:this={contentElement}
 	>
 		{@html htmlContent}
