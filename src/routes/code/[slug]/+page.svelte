@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { marked } from 'marked';
 
 	let { data }: { data: PageData } = $props();
 	const { project } = data;
@@ -180,9 +181,9 @@
 		<div class="mb-16">
 			<h2 class="mb-6 text-3xl font-bold">About this project</h2>
 			<div class="max-w-none">
-				<p class="mb-6 text-justify text-lg leading-relaxed font-light">
-					{project.description}
-				</p>
+				<div class="project-description prose prose-lg prose-orange dark:prose-invert max-w-none text-justify font-light">
+					{@html marked.parse(project.description)}
+				</div>
 			</div>
 		</div>
 

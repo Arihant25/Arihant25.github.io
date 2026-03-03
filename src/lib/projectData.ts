@@ -13,6 +13,18 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'pyterametrics',
+		codeUrl: 'https://github.com/Arihant25/pyterametrics/',
+		deployedUrl: 'https://pypi.org/project/pyterametrics/',
+		coverImage: '/projects/pyterametrics/pyterametrics-1.png',
+		description:
+			'A Python port of the TerraMetrics Terraform quality metrics tool, originally written in Java. It parses `.tf` files and computes around 100 structural and quality metrics from their Abstract Syntax Trees. I validated the Python port against 5,594 Terraform blocks to ensure behavioral equivalence with the Java implementation. Read my [blog post](/blog/porting-terrametrics-to-python) for a more detailed analysis of the parser and the validation results.',
+		shortDescription: 'A Python port of TerraMetrics for Terraform quality metrics',
+		year: 2026,
+		technologies: ['Python', 'Terraform'],
+		slug: 'pyterametrics'
+	},
+	{
 		name: "Is It Open?",
 		codeUrl: 'https://github.com/Arihant25/isitopen',
 		deployedUrl: 'https://isitopen.vercel.app/',
@@ -39,7 +51,7 @@ export const projects: Project[] = [
 			'/projects/isec26/isec26-2.png'
 		],
 		description:
-			'I was asked to make the official website of the Third Workshop on Generative AI based Software Engineering, part of ISEC 2026, IIS Jaipur. I used Next.js to make this website, and deployed it as a static site on GitHub Pages. This was yet another experience in working with Next.js for static sites, but the first time I maintained a conference-related website.',
+			'I was asked to make the official website of the Third Workshop on Generative AI based Software Engineering, part of ISEC (Innovations in Software Engineering Conference) 2026, IIS Jaipur. I used Next.js to make this website, and deployed it as a static site on GitHub Pages. This was yet another experience in working with Next.js for static sites, but the first time I maintained a conference-related website. Coincidentally, I participated and won first prize along with my team (Vijay Aravynthan and Itikela Bhaskar) in the Data Science challenge held as part of the conference, which is how I got to attend the conference.',
 		shortDescription: 'Official website of ISEC 26 Workshop on Generative AI based Software Engineering',
 		year: 2025,
 		technologies: ['Next.js', 'GitHub Pages'],
