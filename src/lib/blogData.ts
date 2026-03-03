@@ -13,6 +13,79 @@ export interface BlogData {
 export const blogData: BlogData = {
     blogs: [
         {
+            coverImage: 'https://s3-ap-southeast-2.amazonaws.com/content-prod-529546285894/2020/03/tf.png',
+            title: 'Porting TerraMetrics to Python: A 5,594-Block Validation',
+            description: 'I ported the TerraMetrics Terraform quality metrics tool from Java to Python and validated it against 5,594 blocks — here is what I found.',
+            date: '3 March 2026',
+            slug: 'porting-terrametrics-to-python',
+            content: `TerraMetrics is an open-source research tool for measuring Infrastructure-as-Code quality in Terraform. In practice, it parses \`.tf\` files—the configurations used to define cloud infrastructure on AWS, Google Cloud, Azure, and similar platforms—and computes around 100 structural and quality metrics from their Abstract Syntax Trees.
+
+I came across TerraMetrics while hunting for metrics I could use as reward signals to fine-tune LLMs with reinforcement learning, with the goal of getting them to generate better Terraform code. It fit the use case perfectly, except for one annoying detail: my entire fine-tuning pipeline was in Python, and TerraMetrics was a Java \`.jar\` that had to be invoked externally. Calling it as a subprocess technically worked, but the whole setup felt brittle, so I ported the tool to Python, eliminated the external dependency, and kept the logic as faithful as possible to the original implementation.
+
+Claude Sonnet 4.6 and I got it done in a couple of hours. Since AI-generated code shouldn't be taken on faith, I validated it rigorously using the same dataset as the original paper—5,594 Terraform blocks—comparing outputs block by block to verify behavioral equivalence.
+
+**pyterametrics** is available on PyPI:
+
+[https://pypi.org/project/pyterametrics/](https://pypi.org/project/pyterametrics/)
+
+\`\`\`bash
+pip install pyterametrics
+\`\`\`
+
+## What Exactly Was Validated?
+
+The original TerraMetrics paper introduced a Java implementation that computes roughly 100 metrics per Terraform block, with each block identified by its relative file path, block identifiers, and line range. For validation, I ran both implementations against three pinned git tags: terraform-aws-eks at v19.20.0 (871 blocks across 57 files), terraform-google-kubernetes-engine at v29.0.0 (3,391 blocks across 445 files), and caf-terraform-landingzones at 5.7.7 (1,332 blocks across 231 files)—5,594 blocks in total.
+
+For every matched block, I compared every numeric metric directly between the two implementations. For the understandability classification from the paper, I replicated the same rule: low complexity for \`sumMccabeCC < 20\`, moderate for 20–50, and high for anything above 50, then computed Cohen's Kappa between the Java and Python labels. Cohen's Kappa is a standard statistical measure of how well two systems agree with each other, accounting for the possibility that some agreement might happen by chance—a score of 1.0 means perfect agreement, while 0 means no better than random.
+
+## Automated Comparison Results
+
+### Block Matching
+
+| Repository | Java | Python | Matched | Match Rate |
+|---|---|---|---|---|
+| aws-eks | 871 | 871 | 871 | 100% |
+| google-kubernetes-engine | 3,391 | 3,371 | 3,260 | 96.14% |
+| caf-landingzones | 1,332 | 1,328 | 1,328 | 99.70% |
+| **TOTAL** | **5,594** | **5,570** | **5,459** | **97.59%** |
+
+Nearly 98% of blocks matched by identity (file + block + line range), though raw matching percentage doesn't tell the whole story.
+
+## Understandability Classification
+
+For every matched block, the complexity label matched exactly—Cohen's Kappa of 1.0 across all three repositories. Not a single block was classified differently between the two implementations.
+
+## Investigating the 246 Unmatched Blocks
+
+There were 246 unmatched blocks in total—135 that appeared only in the Java output and 111 that appeared only in Python. I manually investigated every one of them, and all were fully accounted for. They fall into four categories.
+
+**Trailing blank line differences (10 GKE blocks).** These are cases where both implementations agree on the block's start line but disagree on its end line. For example, \`resource google_container_cluster primary\` shows up at lines 22–397 in the Java output but 22–393 in Python. The reason is that Java counts trailing blank lines before the closing \`}\` as part of the block, while the Python lark-based parser stops before them. The blocks are semantically identical, all metrics match exactly, and the discrepancy is purely cosmetic.
+
+**Cascading line-shift (222 GKE blocks).** This one is subtle. In large \`variables.tf\` files containing 100+ blocks, a single small end-line difference early in the file causes every subsequent block's line range to shift by a consistent offset. This cascaded across 18 files, and despite the large number of "unmatched" blocks it produced on paper, there were zero metric mismatches—only whitespace boundary differences that affected how blocks were identified, not what they measured.
+
+**Version skew in the ground truth (3 GKE blocks).** Three blocks appear in the Java output but simply can't be found anywhere in the repository at the pinned tag v29.0.0. Running \`grep\` on the cloned repo confirms the relevant strings are absent. The most plausible explanation is that the Java ground truth was generated from a slightly newer commit before the tag was pinned. This isn't a parser issue on either side—it's a version mismatch in the reference data.
+
+**A real grammar bug in python-hcl2 (4 CAF blocks).** One file in the caf-terraform-landingzones repo—\`caf_solution/add-ons/terraform_cloud/main.tf\`—failed to parse entirely, throwing an \`UnexpectedToken\` error at line 52. The culprit is a trailing comma before a closing parenthesis in a function call, which is perfectly valid HCL2 syntax but happens to trip up a grammar limitation in python-hcl2 v6's lark parser. This is an upstream bug rather than anything in pyterametrics itself; the tool correctly flags the file as unparseable and skips metric generation for those four blocks. They represent 0.07% of the total dataset, and fixing it would require a patch to the upstream parser.
+
+## Performance
+
+Measured wall-clock time on the same machine (Windows, JVM pre-warmed, Python 3.13 via uv):
+
+| Repository | Java | Python | Ratio |
+|---|---|---|---|
+| aws-eks (871 blocks) | 1.82s | 3.13s | 1.72× slower |
+| GKE (3,391 blocks) | 4.92s | 7.73s | 1.57× slower |
+| CAF (1,332 blocks) | 2.59s | 3.79s | 1.46× slower |
+
+Python runs about 1.5–1.7× slower than Java, which is unsurprising when you look at what each runtime is actually doing. Java uses a just-in-time compiler, which means it watches the code as it runs and optimizes the hot paths—like repeatedly walking a syntax tree—on the fly. Python has no equivalent of that, and it's also limited by the Global Interpreter Lock, a design constraint that prevents Python threads from running truly in parallel. On top of that, the parsing library pyterametrics uses under the hood—lark—is written in pure Python, whereas the original Java tool uses a compiled parser generated by a tool called ANTLR, which is considerably faster. That said, analyzing all 445 Terraform files in the GKE repo still completes in under 8 seconds, which is more than fast enough for research workflows or CI pipelines where you're running this as a one-off analysis rather than in a tight loop.
+
+## Final Verdict
+
+pyterametrics achieves a 97.59% block identity match overall—100% for aws-eks—with zero metric discrepancies on every matched block and perfect replication of the paper's understandability classification at κ = 1.0. The 246 unmatched blocks all have mundane explanations: whitespace counting conventions, a version mismatch in the ground truth, and a single upstream parser bug affecting four files. If your pipeline is already in Python and you want Terraform quality metrics without keeping a \`.jar\` around, the port does the job faithfully.
+
+*Note: The original paper was titled "Terrametrics," but the GitHub repository used the spelling "terametrics." I followed the repository naming and called the port pyterametrics.*`,
+        },
+        {
             coverImage: 'https://cdn-images-1.medium.com/v2/resize:fit:2000/1*nIW0oS1lqs5g_bH4S2T02Q.png',
             title: 'Cursor vs Copilot: Let the Results Speak',
             description: 'A data-driven comparison of AI coding assistants using SWE-Bench Verified.',

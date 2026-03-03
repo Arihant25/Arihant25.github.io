@@ -9,9 +9,11 @@
 	const blog = blogData.blogs.find((b) => b.slug === params.slug);
 	if (!blog) throw error(404, 'Blog not found');
 
+	marked.setOptions({ gfm: true, breaks: false });
+
 	let htmlContent = '';
 	let contentElement;
-	$: htmlContent = marked.parse(blog.content);
+	$: htmlContent = marked.parse(blog.content) as string;
 </script>
 
 <svelte:head>
@@ -66,7 +68,7 @@
 	/>
 
 	<div
-		class="blog-content prose prose-lg w-full max-w-3xl px-5 text-justify text-lg leading-relaxed sm:px-6 lg:px-8"
+		class="blog-content w-full max-w-3xl px-5 text-justify text-lg leading-relaxed sm:px-6 lg:px-8"
 		bind:this={contentElement}
 	>
 		{@html htmlContent}
@@ -139,6 +141,7 @@
 
 	.blog-content :global(pre) {
 		background-color: var(--code-bg);
+		color: var(--text-primary);
 		padding: 1rem;
 		border-radius: 0.375rem;
 		overflow-x: auto;
@@ -148,6 +151,7 @@
 	.blog-content :global(code) {
 		font-family: var(--font-space-mono);
 		background-color: var(--code-bg);
+		color: var(--text-primary);
 		padding: 0.125rem 0.5rem;
 		border-radius: 0.25rem;
 		font-size: 0.875rem;
@@ -156,6 +160,11 @@
 	.blog-content :global(pre code) {
 		background-color: transparent;
 		padding: 0;
+	}
+
+	.blog-content :global(strong),
+	.blog-content :global(b) {
+		color: var(--text-primary);
 	}
 
 	.blog-content :global(a) {
@@ -174,4 +183,37 @@
 		margin: 1rem auto;
 		display: block;
 	}
+
+	.blog-content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1.5rem 0;
+		font-size: 0.95rem;
+		overflow-x: auto;
+		display: block;
+	}
+
+	.blog-content :global(thead) {
+		border-bottom: 2px solid var(--border-color, #e2e8f0);
+	}
+
+	.blog-content :global(th) {
+		text-align: left;
+		padding: 0.6rem 1rem;
+		font-weight: 600;
+		color: var(--text-primary);
+		white-space: nowrap;
+	}
+
+	.blog-content :global(td) {
+		padding: 0.55rem 1rem;
+		color: var(--text-primary);
+		border-bottom: 1px solid var(--border-color, #e2e8f0);
+		white-space: nowrap;
+	}
+
+	.blog-content :global(tr:last-child td) {
+		border-bottom: none;
+	}
+
 </style>
