@@ -12,7 +12,7 @@
 	let pageFlip: any;
 	let PageFlipClass: any;
 	let wavesurfer: WaveSurfer | null = null;
-	let waveformContainer: HTMLDivElement;
+	let waveformContainer = $state<HTMLDivElement | undefined>(undefined);
 	let isPlaying = $state(false);
 	let currentTime = $state('0:00');
 	let duration = $state('0:00');
@@ -36,12 +36,13 @@
 
 		// Generate paper pages based on pageCount from researchData
 		const pages: string[] = [];
+		const pageImageExtension = paper.pageImageExtension ?? 'png';
 
 		// Add cover image as the first page
 		pages.push(`/research/papers/${paper.slug}/${paper.coverImage}`);
 
 		for (let i = 1; i <= paper.pageCount; i++) {
-			pages.push(`/research/papers/${paper.slug}/${paper.slug}-${i}.png`);
+			pages.push(`/research/papers/${paper.slug}/${paper.slug}-${i}.${pageImageExtension}`);
 		}
 
 		paperPages = pages;
@@ -71,6 +72,9 @@
 		if (!browser || !flipBookContainer || !PageFlipClass) {
 			return;
 		}
+
+		// Prevent duplicate listeners when reinitializing on resize.
+		window.removeEventListener('resize', handleResize);
 
 		// Clean up existing instance if any
 		if (pageFlip) {
@@ -127,16 +131,16 @@
 	function handleResize() {
 		if (!pageFlip) return;
 
-		const isMobile = window.innerWidth < 768;
-		pageFlip.updateSettings({
-			width: isMobile ? window.innerWidth - 40 : 550,
-			height: isMobile ? (window.innerWidth - 40) * 1.414 : 733,
-			usePortrait: isMobile
-		});
-		pageFlip.update();
+		const currentPage = pageFlip.getCurrentPageIndex?.() ?? 0;
+		initializeFlipBook();
+
+		if (pageFlip && typeof pageFlip.turnToPage === 'function') {
+			pageFlip.turnToPage(currentPage);
+		}
 	}
 
 	function initializeAudioPlayer() {
+		if (!paper.audioSummary) return;
 		if (!browser || !waveformContainer) return;
 
 		const audioPath = `/research/papers/${paper.slug}/${paper.audioSummary}`;
@@ -355,122 +359,126 @@
 			</div>
 		</div>
 
-		<!-- Audio Player -->
-		<div
-			class="mx-auto max-w-4xl rounded-lg p-4 shadow-lg md:p-6"
-			style="background-color: var(--card-bg); border: 1px solid var(--border-color);"
-		>
-			<h2
-				class="mb-4 text-xl font-semibold md:mb-6 md:text-2xl"
-				style="color: var(--text-primary); font-family: var(--font-ibm-plex-serif);"
+		{#if paper.audioSummary}
+			<!-- Audio Player -->
+			<div
+				class="mx-auto max-w-4xl rounded-lg p-4 shadow-lg md:p-6"
+				style="background-color: var(--card-bg); border: 1px solid var(--border-color);"
 			>
-				AI Overview Audio<span class="orange">.</span>
-			</h2>
+				<h2
+					class="mb-4 text-xl font-semibold md:mb-6 md:text-2xl"
+					style="color: var(--text-primary); font-family: var(--font-ibm-plex-serif);"
+				>
+					AI Overview Audio<span class="orange">.</span>
+				</h2>
 
-			<!-- Waveform -->
-			<div bind:this={waveformContainer} class="mb-4 rounded-lg p-2 md:mb-6 md:p-3"></div>
+				<!-- Waveform -->
+				<div bind:this={waveformContainer} class="mb-4 rounded-lg p-2 md:mb-6 md:p-3"></div>
 
-			<!-- Controls -->
-			<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-				<!-- Playback Controls -->
-				<div class="flex items-center justify-center gap-3 md:gap-4">
-					<!-- Skip Backward -->
-					<button
-						onclick={skipBackward}
-						class="rounded-full p-2 transition-all duration-200 hover:scale-110 md:p-2.5"
-						style="color: var(--text-secondary); background-color: var(--bg-secondary);"
-						title="Skip -10s"
-						aria-label="Skip backward 10 seconds"
-					>
-						<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"
-							></path>
-						</svg>
-					</button>
-
-					<!-- Play/Pause -->
-					<button
-						onclick={togglePlayPause}
-						class="bg-orange rounded-full p-3 text-white transition-all duration-200 hover:scale-110 hover:shadow-lg md:p-3.5"
-						title={isPlaying ? 'Pause' : 'Play'}
-					>
-						{#if isPlaying}
-							<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									fill-rule="evenodd"
-									d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						{:else}
-							<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									fill-rule="evenodd"
-									d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						{/if}
-					</button>
-
-					<!-- Skip Forward -->
-					<button
-						onclick={skipForward}
-						class="rounded-full p-2 transition-all duration-200 hover:scale-110 md:p-2.5"
-						style="color: var(--text-secondary); background-color: var(--bg-secondary);"
-						title="Skip +10s"
-						aria-label="Skip forward 10 seconds"
-					>
-						<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"
-							></path>
-						</svg>
-					</button>
-				</div>
-
-				<!-- Speed Control and Time Display -->
-				<div class="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
-					<!-- Speed Slider -->
-					<div class="flex items-center justify-center gap-2">
-						<span class="text-xs font-medium" style="color: var(--text-secondary);"> Speed: </span>
-						<input
-							type="range"
-							min="1"
-							max="2"
-							step="0.1"
-							value={playbackSpeed}
-							oninput={(e) => changePlaybackSpeed(parseFloat(e.currentTarget.value))}
-							class="speed-slider w-24 cursor-pointer md:w-20"
-							aria-label="Playback speed"
-						/>
-						<span
-							class="text-xs font-semibold"
-							style="color: var(--text-primary); min-width: 2rem;"
+				<!-- Controls -->
+				<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+					<!-- Playback Controls -->
+					<div class="flex items-center justify-center gap-3 md:gap-4">
+						<!-- Skip Backward -->
+						<button
+							onclick={skipBackward}
+							class="rounded-full p-2 transition-all duration-200 hover:scale-110 md:p-2.5"
+							style="color: var(--text-secondary); background-color: var(--bg-secondary);"
+							title="Skip -10s"
+							aria-label="Skip backward 10 seconds"
 						>
-							{playbackSpeed.toFixed(1)}x
-						</span>
+							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"
+								></path>
+							</svg>
+						</button>
+
+						<!-- Play/Pause -->
+						<button
+							onclick={togglePlayPause}
+							class="bg-orange rounded-full p-3 text-white transition-all duration-200 hover:scale-110 hover:shadow-lg md:p-3.5"
+							title={isPlaying ? 'Pause' : 'Play'}
+						>
+							{#if isPlaying}
+								<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+									<path
+										fill-rule="evenodd"
+										d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+							{:else}
+								<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+							{/if}
+						</button>
+
+						<!-- Skip Forward -->
+						<button
+							onclick={skipForward}
+							class="rounded-full p-2 transition-all duration-200 hover:scale-110 md:p-2.5"
+							style="color: var(--text-secondary); background-color: var(--bg-secondary);"
+							title="Skip +10s"
+							aria-label="Skip forward 10 seconds"
+						>
+							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"
+								></path>
+							</svg>
+						</button>
 					</div>
 
-					<!-- Time Display -->
-					<div
-						class="text-center text-sm font-medium md:text-left"
-						style="color: var(--text-secondary);"
-					>
-						<span>{currentTime}</span>
-						<span class="mx-1">/</span>
-						<span>{duration}</span>
+					<!-- Speed Control and Time Display -->
+					<div class="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
+						<!-- Speed Slider -->
+						<div class="flex items-center justify-center gap-2">
+							<span class="text-xs font-medium" style="color: var(--text-secondary);">
+								Speed:
+							</span>
+							<input
+								type="range"
+								min="1"
+								max="2"
+								step="0.1"
+								value={playbackSpeed}
+								oninput={(e) => changePlaybackSpeed(parseFloat(e.currentTarget.value))}
+								class="speed-slider w-24 cursor-pointer md:w-20"
+								aria-label="Playback speed"
+							/>
+							<span
+								class="text-xs font-semibold"
+								style="color: var(--text-primary); min-width: 2rem;"
+							>
+								{playbackSpeed.toFixed(1)}x
+							</span>
+						</div>
+
+						<!-- Time Display -->
+						<div
+							class="text-center text-sm font-medium md:text-left"
+							style="color: var(--text-secondary);"
+						>
+							<span>{currentTime}</span>
+							<span class="mx-1">/</span>
+							<span>{duration}</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{/if}
 	</div>
 </div>
 
@@ -514,9 +522,6 @@
 	}
 
 	/* Cover page styles */
-	.page-cover {
-	}
-
 	.page-cover .page-content {
 		padding: 0;
 	}

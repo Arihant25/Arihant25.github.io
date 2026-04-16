@@ -8,10 +8,23 @@ export interface ResearchData {
     codeLink?: string;
     coverImage: string;
     audioSummary: string;
+    pageImageExtension?: 'png' | 'jpg';
     pageCount: number;
 }
 
 export const researchData: ResearchData[] = [
+    {
+        slug: 'dark-patterns-quick-commerce',
+        title: 'Dark Patterns in Indian Quick Commerce Apps: A Student Perspective',
+        year: 2026,
+        venue: 'Bridge Over Troubled Water (CHI 2026 Workshop), Barcelona',
+        description: "Our paper looks at how dark patterns show up in quick commerce apps, and the awareness-action gap where users notice the manipulation but still go along with it.",
+        paperLink: 'https://arxiv.org/abs/2604.02257',
+        coverImage: 'cover.jpg',
+        audioSummary: 'overview.m4a',
+        pageImageExtension: 'jpg',
+        pageCount: 11
+    },
     {
         slug: 'swenergy',
         title: 'SWEnergy: An Empirical Study on Energy Efficiency in Agentic Issue Resolution Frameworks with SLMs',

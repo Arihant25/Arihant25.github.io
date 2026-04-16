@@ -157,7 +157,7 @@
 				<p class="text-lg font-semibold">
 					Coordinator
 					<span class="font-normal">
-						Mar 2025 — Present · {calculateDuration('Mar 2025', 'Present')}
+						Mar 2025 — Mar 2026 · {calculateDuration('Mar 2025', 'Mar 2026')}
 					</span>
 				</p>
 				<p class="text-lg font-semibold">
@@ -175,8 +175,9 @@
 					open at all but aimed primarily at freshers. As part of the Tech team, I helped create the
 					Team Members section of the Club website, making that my first experience with Next.js. In
 					my second year, I got promoted to the position of Club Coordinator. As a Coordinator, I
-					have been managing the development of various projects under the club, and trying to come
-					up with new events that will take the club to new heights.
+					was managing the development of various projects under the club, and trying to come
+					up with new events that will take the club to new heights. Some of the events I helped organise 
+					include HackIIIT '26, Build2Break at Infinium, Worst UI Hackathon, Build With AI, Intro to GSoC, Intro to Git
 				</p>
 			</div>
 		</div>
