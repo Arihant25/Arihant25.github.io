@@ -216,7 +216,7 @@
 		<div class="flex flex-col items-center gap-12 md:flex-row md:justify-between">
 			<div class="order-1 flex justify-center md:order-1 md:w-1/2">
 				<img
-					src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/WTS_2024_Group_Photo.jpg/640px-WTS_2024_Group_Photo.jpg"
+					src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/WTS_2024_Group_Photo.jpg/1920px-WTS_2024_Group_Photo.jpg"
 					alt="Wikimedia Foundation Logo"
 					class="h-70 w-120 rounded-lg object-cover shadow-lg"
 					loading="lazy"
@@ -304,7 +304,7 @@
 		<div class="flex flex-col items-center gap-12 md:flex-row md:justify-between">
 			<div class="flex justify-center md:w-1/2">
 				<img
-					src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/IIIT_Hyderabad_Drone_view.jpg/640px-IIIT_Hyderabad_Drone_view.jpg"
+					src="https://upload.wikimedia.org/wikipedia/commons/1/11/IIIT_Hyderabad.jpg"
 					alt="IIIT Hyderabad"
 					class="h-70 w-120 rounded-lg object-cover shadow-lg"
 					loading="lazy"
