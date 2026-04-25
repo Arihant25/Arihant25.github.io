@@ -13,6 +13,21 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'ChatGPT Display',
+		codeUrl: 'https://github.com/Arihant25/chatgpt-quotes',
+		coverImage: '/projects/chatgpt-display/chatgpt-display-1.png',
+		screenshots: [
+			'/projects/chatgpt-display/chatgpt-display-2.png',
+			'/projects/chatgpt-display/chatgpt-display-3.png'
+		],
+		description:
+			"I was procrastinating instead of studying for my end semester examinations, and I found myself using ChatGPT frequently, so I thought of finally making this project that I wanted to for many months.",
+		shortDescription: 'A browser extension that replaces the ChatGPT home screen quote with your own content',
+		year: 2026,
+		technologies: ['JavaScript', 'Chrome Extension API', 'HTML', 'CSS'],
+		slug: 'chatgpt-display'
+	},
+	{
 		name: 'pyterametrics',
 		codeUrl: 'https://github.com/Arihant25/pyterametrics/',
 		deployedUrl: 'https://pypi.org/project/pyterametrics/',
