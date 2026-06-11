@@ -13,6 +13,22 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'DecidArch',
+		codeUrl: 'https://github.com/Arihant25/decidarch',
+		coverImage: '/projects/decidarch/decidarch-1.png',
+		screenshots: [
+			'/projects/decidarch/decidarch-2.png',
+			'/projects/decidarch/decidarch-4.png',
+			'/projects/decidarch/decidarch-3.png',
+		],
+		description:
+			"I took the Software Engineering course last semester (Spring '26), and in that Professor Karthik made everyone play a game called DecidArch in groups of 5. Inspired by the game, I made an online multiplayer version of it with the exact cards and rules. I also added a newer version of the game that has Ethics aware decision-making.",
+		shortDescription: 'An online multiplayer version of DecidArch, a software architecture decision-making game',
+		year: 2026,
+		technologies: ['Next.js', 'Socket.io', 'TypeScript'],
+		slug: 'decidarch'
+	},
+	{
 		name: 'Quoty',
 		codeUrl: 'https://github.com/Arihant25/quoty',
 		deployedUrl: 'https://chromewebstore.google.com/detail/quoty/napjbhgffnpcdaebebhnoiffjgeegbed',
