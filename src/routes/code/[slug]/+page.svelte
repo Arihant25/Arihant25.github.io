@@ -40,11 +40,36 @@
 			loadingStates = initialLoadingStates;
 		}
 	});
+
+	const softwareSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: project.name,
+		description: project.shortDescription,
+		url: project.deployedUrl ?? `https://arihant25.github.io/code/${project.slug}`,
+		author: {
+			'@type': 'Person',
+			name: 'Arihant',
+			url: 'https://arihant25.github.io'
+		},
+		...(project.technologies && { applicationCategory: project.technologies.join(', ') }),
+		...(project.year && { dateCreated: String(project.year) })
+	};
 </script>
 
 <svelte:head>
 	<title>{project.name} | Arihant</title>
 	<meta name="description" content={project.shortDescription} />
+	<link rel="canonical" href="https://arihant25.github.io/code/{project.slug}" />
+	<meta property="og:title" content="{project.name} | Arihant's Corner" />
+	<meta property="og:description" content={project.shortDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://arihant25.github.io/code/{project.slug}" />
+	<meta property="og:image" content="https://arihant25.github.io{project.coverImage}" />
+	<meta name="twitter:title" content="{project.name} | Arihant's Corner" />
+	<meta name="twitter:description" content={project.shortDescription} />
+	<meta name="twitter:image" content="https://arihant25.github.io{project.coverImage}" />
+	{@html `<script type="application/ld+json">${JSON.stringify(softwareSchema)}</script>`}
 </svelte:head>
 
 <div>
@@ -181,7 +206,9 @@
 		<div class="mb-16">
 			<h2 class="mb-6 text-3xl font-bold">About this project</h2>
 			<div class="max-w-none">
-				<div class="project-description prose prose-lg prose-orange dark:prose-invert max-w-none text-justify font-light">
+				<div
+					class="project-description prose prose-lg prose-orange dark:prose-invert max-w-none text-justify font-light"
+				>
 					{@html marked.parse(project.description)}
 				</div>
 			</div>

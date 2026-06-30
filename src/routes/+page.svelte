@@ -100,7 +100,44 @@
 	onMount(() => {
 		selectRandomQuote();
 	});
+
+	const siteUrl = 'https://arihant25.github.io';
+	const description =
+		"I'm a Computer Science student and researcher at IIIT Hyderabad. Here you'll find my blog, projects, music, photos, and research.";
+
+	const personSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'Arihant',
+		url: siteUrl,
+		image: `${siteUrl}/avatar.png`,
+		sameAs: [
+			'https://github.com/Arihant25',
+			'https://open.spotify.com/artist/1Jtf3PGZ3Z6NwLyD7RGxjS'
+		],
+		jobTitle: 'Computer Science Student & Researcher',
+		affiliation: {
+			'@type': 'CollegeOrUniversity',
+			name: 'IIIT Hyderabad'
+		},
+		description: description
+	};
 </script>
+
+<svelte:head>
+	<title>Arihant's Corner</title>
+	<meta name="description" content={description} />
+	<link rel="canonical" href={siteUrl} />
+	<meta property="og:title" content="Arihant's Corner" />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:image" content="{siteUrl}/avatar.png" />
+	<meta name="twitter:title" content="Arihant's Corner" />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="{siteUrl}/avatar.png" />
+	{@html `<script type="application/ld+json">${JSON.stringify(personSchema)}</script>`}
+</svelte:head>
 
 <div class="md:mx-4">
 	<!-- HERO -->
@@ -175,9 +212,10 @@
 					open at all but aimed primarily at freshers. As part of the Tech team, I helped create the
 					Team Members section of the Club website, making that my first experience with Next.js. In
 					my second year, I got promoted to the position of Club Coordinator. As a Coordinator, I
-					was managing the development of various projects under the club, and trying to come
-					up with new events that will take the club to new heights. Some of the events I helped organise 
-					include HackIIIT '26, Build2Break at Infinium, Worst UI Hackathon, Build With AI, Intro to GSoC, Intro to Git
+					was managing the development of various projects under the club, and trying to come up
+					with new events that will take the club to new heights. Some of the events I helped
+					organise include HackIIIT '26, Build2Break at Infinium, Worst UI Hackathon, Build With AI,
+					Intro to GSoC, Intro to Git
 				</p>
 			</div>
 		</div>

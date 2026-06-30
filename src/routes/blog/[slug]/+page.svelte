@@ -14,10 +14,42 @@
 	let htmlContent = '';
 	let contentElement;
 	$: htmlContent = marked.parse(blog.content) as string;
+
+	const articleSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: blog.title,
+		description: blog.description,
+		image: blog.coverImage,
+		url: `https://arihant25.github.io/blog/${blog.slug}`,
+		datePublished: new Date(blog.date).toISOString(),
+		author: {
+			'@type': 'Person',
+			name: 'Arihant',
+			url: 'https://arihant25.github.io'
+		},
+		publisher: {
+			'@type': 'Person',
+			name: 'Arihant',
+			url: 'https://arihant25.github.io'
+		}
+	};
 </script>
 
 <svelte:head>
 	<title>{blog.title} | Arihant</title>
+	<meta name="description" content={blog.description} />
+	<link rel="canonical" href="https://arihant25.github.io/blog/{blog.slug}" />
+	<meta property="og:title" content="{blog.title} | Arihant's Corner" />
+	<meta property="og:description" content={blog.description} />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://arihant25.github.io/blog/{blog.slug}" />
+	<meta property="og:image" content={blog.coverImage} />
+	<meta property="article:published_time" content={new Date(blog.date).toISOString()} />
+	<meta name="twitter:title" content="{blog.title} | Arihant's Corner" />
+	<meta name="twitter:description" content={blog.description} />
+	<meta name="twitter:image" content={blog.coverImage} />
+	{@html `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script>`}
 </svelte:head>
 
 <div
@@ -215,5 +247,4 @@
 	.blog-content :global(tr:last-child td) {
 		border-bottom: none;
 	}
-
 </style>

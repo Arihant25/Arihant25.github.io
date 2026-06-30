@@ -29,7 +29,25 @@
 
 <svelte:head>
 	<title>Code | Arihant</title>
-	<meta name="description" content="Projects by Arihant." />
+	<meta
+		name="description"
+		content="Projects and software built by Arihant — web apps, tools, research, and more."
+	/>
+	<link rel="canonical" href="https://arihant25.github.io/code" />
+	<meta property="og:title" content="Code | Arihant's Corner" />
+	<meta
+		property="og:description"
+		content="Projects and software built by Arihant — web apps, tools, research, and more."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://arihant25.github.io/code" />
+	<meta property="og:image" content="https://arihant25.github.io/avatar.png" />
+	<meta name="twitter:title" content="Code | Arihant's Corner" />
+	<meta
+		name="twitter:description"
+		content="Projects and software built by Arihant — web apps, tools, research, and more."
+	/>
+	<meta name="twitter:image" content="https://arihant25.github.io/avatar.png" />
 </svelte:head>
 
 <div class="mx-auto flex flex-col items-center p-5 py-12 sm:px-6 lg:px-8">

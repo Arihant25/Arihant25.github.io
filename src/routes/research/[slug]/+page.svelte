@@ -228,11 +228,46 @@
 		}
 		window.removeEventListener('resize', handleResize);
 	});
+
+	const scholarlySchema = {
+		'@context': 'https://schema.org',
+		'@type': 'ScholarlyArticle',
+		headline: paper.title,
+		description: paper.description,
+		url: `https://arihant25.github.io/research/${paper.slug}`,
+		sameAs: paper.paperLink,
+		author: {
+			'@type': 'Person',
+			name: 'Arihant',
+			url: 'https://arihant25.github.io'
+		},
+		datePublished: String(paper.year),
+		publisher: {
+			'@type': 'Organization',
+			name: paper.venue
+		}
+	};
 </script>
 
 <svelte:head>
 	<title>{paper.title} | Arihant</title>
 	<meta name="description" content={paper.description} />
+	<link rel="canonical" href="https://arihant25.github.io/research/{paper.slug}" />
+	<meta property="og:title" content="{paper.title} | Arihant's Corner" />
+	<meta property="og:description" content={paper.description} />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://arihant25.github.io/research/{paper.slug}" />
+	<meta
+		property="og:image"
+		content="https://arihant25.github.io/research/papers/{paper.slug}/{paper.coverImage}"
+	/>
+	<meta name="twitter:title" content="{paper.title} | Arihant's Corner" />
+	<meta name="twitter:description" content={paper.description} />
+	<meta
+		name="twitter:image"
+		content="https://arihant25.github.io/research/papers/{paper.slug}/{paper.coverImage}"
+	/>
+	{@html `<script type="application/ld+json">${JSON.stringify(scholarlySchema)}</script>`}
 </svelte:head>
 
 <div

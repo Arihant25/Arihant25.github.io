@@ -7,6 +7,16 @@
 
 <svelte:head>
 	<title>Photos | Arihant</title>
+	<meta name="description" content="A personal photo gallery by Arihant." />
+	<link rel="canonical" href="https://arihant25.github.io/photos" />
+	<meta property="og:title" content="Photos | Arihant's Corner" />
+	<meta property="og:description" content="A personal photo gallery by Arihant." />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://arihant25.github.io/photos" />
+	<meta property="og:image" content="https://arihant25.github.io/avatar.png" />
+	<meta name="twitter:title" content="Photos | Arihant's Corner" />
+	<meta name="twitter:description" content="A personal photo gallery by Arihant." />
+	<meta name="twitter:image" content="https://arihant25.github.io/avatar.png" />
 </svelte:head>
 
 <div class="mx-auto flex flex-col items-center p-4 py-12 sm:px-6 lg:px-8">
