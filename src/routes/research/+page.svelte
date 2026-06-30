@@ -9,7 +9,19 @@
 
 <svelte:head>
 	<title>Research | Arihant</title>
-	<meta name="description" content="Research papers by Arihant." />
+	<meta name="description" content="Academic research papers and publications by Arihant." />
+	<link rel="canonical" href="https://arihant25.github.io/research" />
+	<meta property="og:title" content="Research | Arihant's Corner" />
+	<meta property="og:description" content="Academic research papers and publications by Arihant." />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://arihant25.github.io/research" />
+	<meta property="og:image" content="https://arihant25.github.io/avatar.png" />
+	<meta name="twitter:title" content="Research | Arihant's Corner" />
+	<meta
+		name="twitter:description"
+		content="Academic research papers and publications by Arihant."
+	/>
+	<meta name="twitter:image" content="https://arihant25.github.io/avatar.png" />
 </svelte:head>
 
 <div class="mx-auto flex flex-col items-center p-5 py-12 sm:px-6 lg:px-8">

@@ -14,6 +14,18 @@
 
 <svelte:head>
 	<title>{release ? `${release.title} | Arihant` : 'Music | Arihant'}</title>
+	{#if release}
+		<meta name="description" content={release.description} />
+		<link rel="canonical" href="https://arihant25.github.io/music/{release.slug}" />
+		<meta property="og:title" content="{release.title} | Arihant's Corner" />
+		<meta property="og:description" content={release.description} />
+		<meta property="og:type" content="music.album" />
+		<meta property="og:url" content="https://arihant25.github.io/music/{release.slug}" />
+		<meta property="og:image" content="https://arihant25.github.io{release.coverImage}" />
+		<meta name="twitter:title" content="{release.title} | Arihant's Corner" />
+		<meta name="twitter:description" content={release.description} />
+		<meta name="twitter:image" content="https://arihant25.github.io{release.coverImage}" />
+	{/if}
 </svelte:head>
 
 {#if release}

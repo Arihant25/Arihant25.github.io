@@ -9,6 +9,25 @@
 
 <svelte:head>
 	<title>Blog | Arihant</title>
+	<meta
+		name="description"
+		content="Thoughts and write-ups by Arihant on technology, programming, and life."
+	/>
+	<link rel="canonical" href="https://arihant25.github.io/blog" />
+	<meta property="og:title" content="Blog | Arihant's Corner" />
+	<meta
+		property="og:description"
+		content="Thoughts and write-ups by Arihant on technology, programming, and life."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://arihant25.github.io/blog" />
+	<meta property="og:image" content="https://arihant25.github.io/avatar.png" />
+	<meta name="twitter:title" content="Blog | Arihant's Corner" />
+	<meta
+		name="twitter:description"
+		content="Thoughts and write-ups by Arihant on technology, programming, and life."
+	/>
+	<meta name="twitter:image" content="https://arihant25.github.io/avatar.png" />
 </svelte:head>
 
 <div class="grid-bg mx-auto flex flex-col items-center p-5 py-12 sm:px-6 lg:px-8">
