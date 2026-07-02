@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { marked } from 'marked';
+	import { optimized } from '$lib/images';
 
 	let { data }: { data: PageData } = $props();
 	const { project } = data;
@@ -183,17 +184,17 @@
 				<div class="order-first lg:order-last">
 					<div
 						class="cursor-pointer overflow-hidden rounded-2xl shadow-2xl"
-						onclick={() => openFullscreen(project.coverImage)}
-						onkeydown={(e) => e.key === 'Enter' && openFullscreen(project.coverImage)}
+						onclick={() => openFullscreen(optimized(project.coverImage))}
+						onkeydown={(e) => e.key === 'Enter' && openFullscreen(optimized(project.coverImage))}
 						role="button"
 						tabindex="0"
 						aria-label="View {project.name} cover image in fullscreen"
 					>
 						<img
-							src={`${project.coverImage}`}
+							src={optimized(project.coverImage)}
 							alt={project.name}
 							class="h-auto w-full object-cover"
-							loading="lazy"
+							fetchpriority="high"
 						/>
 					</div>
 				</div>
@@ -222,8 +223,8 @@
 					{#each project.screenshots as screenshot, index}
 						<div
 							class="group relative inline-block w-fit cursor-pointer justify-self-center overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
-							onclick={() => openFullscreen(screenshot)}
-							onkeydown={(e) => e.key === 'Enter' && openFullscreen(screenshot)}
+							onclick={() => openFullscreen(optimized(screenshot))}
+							onkeydown={(e) => e.key === 'Enter' && openFullscreen(optimized(screenshot))}
 							role="button"
 							tabindex="0"
 							aria-label="View screenshot {index + 1} of {project.name} in fullscreen"
@@ -241,12 +242,13 @@
 
 							<!-- Actual image -->
 							<img
-								src={screenshot}
+								src={optimized(screenshot)}
 								alt={`Screenshot ${index + 1} of {project.name}`}
 								class="block h-auto transition-transform duration-300 group-hover:scale-110"
 								class:opacity-0={loadingStates[index]}
 								class:opacity-100={!loadingStates[index]}
 								loading="lazy"
+								decoding="async"
 								onload={() => handleImageLoad(index)}
 								onerror={() => handleImageError(index)}
 							/>

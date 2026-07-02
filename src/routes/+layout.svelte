@@ -1,8 +1,20 @@
 <script lang="ts">
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import { preloadSounds } from '$lib/sounds';
 
 	let { children } = $props();
+
+	onMount(() => {
+		// Warm the sound cache while the browser is idle so pages that
+		// play audio (e.g. research papers) respond instantly.
+		if ('requestIdleCallback' in window) {
+			requestIdleCallback(() => preloadSounds());
+		} else {
+			setTimeout(preloadSounds, 1000);
+		}
+	});
 </script>
 
 <div

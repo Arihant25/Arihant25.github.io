@@ -1,0 +1,1 @@
+const p=new Map;function t(a){let u=p.get(a);return u||(u=new Audio(a),u.preload="auto",p.set(a,u)),u}function n(){t("/audio/tudum.mp3"),t("/audio/flip.mp3")}function i(a,u){const o=t(a);o.volume=u,o.currentTime=0,o.play().catch(()=>{})}const e=()=>i("/audio/tudum.mp3",.3),d=()=>i("/audio/flip.mp3",1);export{d as a,n as b,e as p};
