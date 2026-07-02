@@ -1,114 +1,101 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	interface Photo {
 		id: string;
-		filename: string;
-		alt: string;
+		src: string;
+		thumb: string;
 		width: number;
 		height: number;
+		placeholder: string;
+		alt: string;
 	}
 
 	interface Props {
 		photo: Photo;
+		onopen?: () => void;
 	}
 
-	let { photo }: Props = $props();
+	let { photo, onopen }: Props = $props();
 
-	let isLoading = $state(true);
+	let loaded = $state(false);
+	let revealed = $state(false);
+	let card: HTMLElement;
 
-	function handleImageLoad() {
-		isLoading = false;
-	}
-
-	function handleImageError() {
-		isLoading = false;
-	}
+	onMount(() => {
+		// Scroll-reveal: fade the card up as it enters the viewport
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					revealed = true;
+					observer.disconnect();
+				}
+			},
+			{ rootMargin: '80px' }
+		);
+		observer.observe(card);
+		return () => observer.disconnect();
+	});
 </script>
 
-<div
-	class="group photo-card relative overflow-hidden rounded-lg shadow-lg transition-all duration-300"
-	class:loading={isLoading}
+<button
+	bind:this={card}
+	class="group photo-card relative block w-full cursor-zoom-in overflow-hidden rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl"
+	class:revealed
+	style="aspect-ratio: {photo.width} / {photo.height};"
+	onclick={onopen}
+	aria-label="View {photo.alt} fullscreen"
 >
-	<!-- Loading Overlay -->
-	{#if isLoading}
-		<div
-			class="loading-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-slate-700"
-		>
-			<div class="loading-spinner"></div>
-		</div>
-	{/if}
+	<!-- Blurred placeholder (tiny inline image, always instant) -->
+	<img
+		src={photo.placeholder}
+		alt=""
+		aria-hidden="true"
+		class="absolute inset-0 h-full w-full scale-110 object-cover blur-lg"
+	/>
 
 	<img
-		src="/photos/{photo.filename}"
+		src={photo.thumb}
 		alt={photo.alt}
-		class="photo-image"
+		width={photo.width}
+		height={photo.height}
+		class="photo-image relative h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+		class:loaded
 		loading="lazy"
-		onload={handleImageLoad}
-		onerror={handleImageError}
+		decoding="async"
+		onload={() => (loaded = true)}
+		onerror={() => (loaded = true)}
 	/>
-	<div class="absolute inset-0"></div>
-</div>
+</button>
 
 <style>
 	.photo-card {
-		/* Let the image determine the size but constrain max dimensions */
-		max-width: 400px;
-		max-height: 400px;
-		/* Allow natural dimensions */
-		width: auto;
-		height: auto;
+		opacity: 0;
+		transform: translateY(24px);
+		transition:
+			opacity 0.6s ease-out,
+			transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 0.3s ease;
 	}
 
-	.photo-image {
-		/* Display at original size, but scale down if too large */
-		width: 100%;
-		height: auto;
-		max-width: 400px;
-		max-height: 400px;
-		object-fit: contain;
-	}
-
-	/* Loading overlay */
-	.loading-overlay {
-		animation: fadeIn 0.2s ease-out;
-		backdrop-filter: blur(2px);
-		background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	/* Loading spinner */
-	.loading-spinner {
-		width: 24px;
-		height: 24px;
-		border: 2px solid #e5e7eb;
-		border-top: 2px solid #ea580c;
-		border-radius: 50%;
-		animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-		position: relative;
-	}
-
-	@keyframes spin {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-
-	/* Image fade-in effect when loaded */
-	.photo-image {
-		transition: opacity 0.3s ease-in-out;
-	}
-
-	.photo-card:not(.loading) .photo-image {
+	.photo-card.revealed {
 		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.photo-image {
+		opacity: 0;
+	}
+
+	.photo-image.loaded {
+		opacity: 1;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.photo-card {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
 	}
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { optimized } from '$lib/images';
 
 	interface Project {
 		name: string;
@@ -134,10 +135,11 @@
 			class="image-container relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900"
 		>
 			<img
-				src={project.coverImage}
+				src={optimized(project.coverImage)}
 				alt={project.name}
 				class="project-image h-52 w-full object-cover transition-transform duration-700"
 				loading="lazy"
+				decoding="async"
 			/>
 
 			<!-- Gradient Overlay -->
