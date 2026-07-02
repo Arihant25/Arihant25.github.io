@@ -20,6 +20,7 @@
 	let lightMode = $derived(!darkMode);
 
 	let audioRef: HTMLAudioElement | null = null;
+	let buttonEl: HTMLButtonElement | null = null;
 
 	// Tweened animation for smooth pull effect
 	const pullY = tweened(OFFSET, {
@@ -89,47 +90,53 @@
 		document.removeEventListener('mouseup', handleMouseUp);
 	}
 
-	function toggleTheme(clickX?: number, clickY?: number) {
+	function toggleTheme() {
 		if (!browser || !document.startViewTransition) {
 			darkMode = !darkMode;
 			return;
+		}
+
+		// Reveal from the bulb's glass (bottom portion of the SVG)
+		const w = window.innerWidth;
+		const h = window.innerHeight;
+		let x = w - 50;
+		let y = 30;
+		if (buttonEl) {
+			const rect = buttonEl.getBoundingClientRect();
+			x = rect.left + rect.width / 2;
+			y = rect.top + rect.height * 0.8;
 		}
 
 		const transition = document.startViewTransition(() => {
 			darkMode = !darkMode;
 		});
 
-		// Get click position or use bulb position
-		let x = clickX ?? window.innerWidth - 50;
-		let y = clickY ?? 30;
-
-		// Calculate the radius needed to cover the entire viewport
-		const maxRadius = Math.hypot(
-			Math.max(x, window.innerWidth - x),
-			Math.max(y, window.innerHeight - y)
-		);
+		// Use percentages so the coordinates can't be misscaled on zoomed or
+		// high-DPI displays: circle() percentages resolve against the
+		// pseudo-element's own box, unlike px in the snapshot coordinate space
+		const xp = (x / w) * 100;
+		const yp = (y / h) * 100;
+		const maxRadius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y));
+		const rp = (maxRadius / (Math.hypot(w, h) / Math.SQRT2)) * 100;
 
 		transition.ready.then(() => {
 			document.documentElement.animate(
 				{
-					clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${maxRadius * 2}px at ${x}px ${y}px)`]
+					clipPath: [`circle(0% at ${xp}% ${yp}%)`, `circle(${rp}% at ${xp}% ${yp}%)`]
 				},
 				{
-					duration: 800,
-					easing: 'ease-in-out',
+					duration: 500,
+					easing: 'ease-in',
 					pseudoElement: '::view-transition-new(root)'
 				}
 			);
 		});
 	}
 
-	function handleMouseUp(event?: MouseEvent) {
+	function handleMouseUp() {
 		dragging = false;
 
-		const x = event?.clientX;
-		const y = event?.clientY;
-
-		toggleTheme(x, y);
+		toggleTheme();
 		playAudio();
 
 		if (currentY === initialY && currentY !== 0) {
@@ -162,13 +169,9 @@
 		}
 	}
 
-	function handleTouchEnd(event?: TouchEvent) {
+	function handleTouchEnd() {
 		if (currentY !== initialY) {
-			const touch = event?.changedTouches?.[0];
-			const x = touch?.clientX;
-			const y = touch?.clientY;
-
-			toggleTheme(x, y);
+			toggleTheme();
 			dragging = false;
 			currentY = 0;
 			initialY = 0;
@@ -176,6 +179,14 @@
 		}
 
 		// Re-enable pull-to-refresh behavior on mobile
+		document.documentElement.style.overscrollBehavior = 'auto';
+		document.removeEventListener('touchend', handleTouchEnd);
+	}
+
+	function handleTouchCancel() {
+		dragging = false;
+		currentY = 0;
+		initialY = 0;
 		document.documentElement.style.overscrollBehavior = 'auto';
 		document.removeEventListener('touchend', handleTouchEnd);
 	}
@@ -192,6 +203,7 @@
 </script>
 
 <button
+	bind:this={buttonEl}
 	class="light-switch-button"
 	style="transform: translateY({$pullY}px)"
 	onmousedown={(e) => handleMouseDown(e)}
@@ -202,6 +214,7 @@
 	ontouchstart={(e) => handleTouchStart(e)}
 	ontouchmove={(e) => handleTouchMove(e)}
 	ontouchend={() => handleTouchEnd()}
+	ontouchcancel={() => handleTouchCancel()}
 	onkeyup={(e) => handleKeyUp(e)}
 	aria-label="Theme Toggle"
 	tabindex="0"
@@ -224,6 +237,9 @@
 		display: flex;
 		align-items: center;
 		transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+		/* Keep the browser from claiming vertical drags as scroll gestures,
+		   which cancels the touch before touchend can toggle the theme */
+		touch-action: none;
 	}
 
 	.light-switch-button:hover {
