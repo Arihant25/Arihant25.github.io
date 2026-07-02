@@ -141,7 +141,7 @@
 
 <div class="md:mx-4">
 	<!-- HERO -->
-	<div class="mx-auto flex flex-col items-center p-4 py-12 sm:px-6 md:flex-row lg:px-8">
+	<div class="mx-auto flex flex-col items-center p-4 pt-20 pb-12 sm:px-6 md:flex-row lg:px-8">
 		<h1
 			class="font-ibm-plex-serif mb-6 w-full text-center font-bold md:text-left"
 			style="font-size: min(10vw, 10rem); line-height: 1.2;"
@@ -160,7 +160,7 @@
 
 	<!-- QUOTE OF THE DAY -->
 	<div
-		class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto dark:bg-slate-900"
+		class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto dark:bg-slate-800"
 	>
 		<div
 			class="font-ibm-plex-serif orange absolute -top-9 left-4 text-9xl font-black"

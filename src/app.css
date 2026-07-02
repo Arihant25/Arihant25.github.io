@@ -2,6 +2,10 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+/* Tailwind v4 ignores tailwind.config.js, so bind the dark: variant to the
+   .dark class (toggled by the light switch) instead of the OS preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-ibm-plex-serif: 'IBM Plex Serif', serif;
   --font-inter: 'Inter', sans-serif;
