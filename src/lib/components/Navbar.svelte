@@ -3,6 +3,7 @@
 	import { slide } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import LightSwitch from './LightSwitch.svelte';
+	import { hapticTap } from '$lib/haptics';
 
 	type NavItem = {
 		href: string;
@@ -27,6 +28,7 @@
 
 	// Function to toggle mobile menu
 	function toggleMenu() {
+		hapticTap();
 		isMenuOpen = !isMenuOpen;
 	}
 

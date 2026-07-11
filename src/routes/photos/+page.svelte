@@ -1,5 +1,6 @@
 <script lang="ts">
 	import PhotoCard from '$lib/components/PhotoCard.svelte';
+	import { hapticTap, hapticStep, hapticGrab } from '$lib/haptics';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -10,16 +11,19 @@
 	const current = $derived(lightboxIndex === null ? null : data.photos[lightboxIndex]);
 
 	function openLightbox(index: number) {
+		hapticTap();
 		lightboxIndex = index;
 		fullLoaded = false;
 	}
 
 	function closeLightbox() {
+		hapticGrab();
 		lightboxIndex = null;
 	}
 
 	function step(delta: number) {
 		if (lightboxIndex === null) return;
+		hapticStep();
 		const count = data.photos.length;
 		lightboxIndex = (lightboxIndex + delta + count) % count;
 		fullLoaded = false;
