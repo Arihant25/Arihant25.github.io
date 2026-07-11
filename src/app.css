@@ -7,111 +7,139 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-ibm-plex-serif: 'IBM Plex Serif', serif;
-  --font-inter: 'Inter', sans-serif;
-  --font-space-mono: 'Space Mono', monospace;
+	--font-ibm-plex-serif: 'IBM Plex Serif', serif;
+	--font-inter: 'Inter', sans-serif;
+	--font-space-mono: 'Space Mono', monospace;
 }
 
 /* Light mode (default) */
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --bg-tertiary: #f3f4f6;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --text-tertiary: #374151;
-  --text-muted: #9ca3af;
-  --border-color: #e5e7eb;
-  --border-light: #f3f4f6;
-  --nav-bg: #ffffff;
-  --card-bg: #ffffff;
-  --card-hover-bg: #f9fafb;
-  --grid-color: rgba(0, 0, 0, 0.03);
-  --overlay-bg: rgba(255, 255, 255, 0.9);
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --code-bg: #f9fafb;
+	--bg-primary: #ffffff;
+	--bg-secondary: #f9fafb;
+	--bg-tertiary: #f3f4f6;
+	--text-primary: #111827;
+	--text-secondary: #6b7280;
+	--text-tertiary: #374151;
+	--text-muted: #9ca3af;
+	--border-color: #e5e7eb;
+	--border-light: #f3f4f6;
+	--nav-bg: #ffffff;
+	--card-bg: #ffffff;
+	--card-hover-bg: #f9fafb;
+	--grid-color: rgba(0, 0, 0, 0.03);
+	--overlay-bg: rgba(255, 255, 255, 0.9);
+	--shadow-color: rgba(0, 0, 0, 0.1);
+	--code-bg: #f9fafb;
 }
 
 /* Dark mode */
 :root.dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #cbd5e1;
-  --text-muted: #64748b;
-  --border-color: #334155;
-  --border-light: #475569;
-  --nav-bg: #1e293b;
-  --card-bg: #1e293b;
-  --card-hover-bg: #334155;
-  --grid-color: rgba(255, 255, 255, 0.05);
-  --overlay-bg: rgba(15, 23, 42, 0.9);
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --code-bg: #1e293b;
+	--bg-primary: #0f172a;
+	--bg-secondary: #1e293b;
+	--bg-tertiary: #334155;
+	--text-primary: #f1f5f9;
+	--text-secondary: #94a3b8;
+	--text-tertiary: #cbd5e1;
+	--text-muted: #64748b;
+	--border-color: #334155;
+	--border-light: #475569;
+	--nav-bg: #1e293b;
+	--card-bg: #1e293b;
+	--card-hover-bg: #334155;
+	--grid-color: rgba(255, 255, 255, 0.05);
+	--overlay-bg: rgba(15, 23, 42, 0.9);
+	--shadow-color: rgba(0, 0, 0, 0.3);
+	--code-bg: #1e293b;
 }
 
 /* View Transition API for theme switching */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+	animation: none;
+	mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
-  z-index: 1;
+	z-index: 1;
 }
 
 ::view-transition-new(root) {
-  z-index: 2;
+	z-index: 2;
 }
 
 body {
-  font-family: var(--font-inter);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+	font-family: var(--font-inter);
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
+}
+
+/* Even the text you select should feel like it belongs here */
+::selection {
+	background-color: #ff5722;
+	color: #ffffff;
+}
+
+/* Keyboard users get the same orange everyone else does */
+:focus-visible {
+	outline: 2px solid #ff5722;
+	outline-offset: 3px;
+}
+
+a,
+button {
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* No orphaned words in headlines, no lonely last lines in paragraphs.
+   (h1 is exempt: the hero headline is viewport-sized and wraps on its own terms.) */
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
 }
 
 /* Engineering grid background */
 .grid-bg {
-  background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: -1px -1px;
+	background-image:
+		linear-gradient(var(--grid-color) 1px, transparent 1px),
+		linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+	background-size: 20px 20px;
+	background-position: -1px -1px;
 }
 
 h1 {
-  font-family: var(--font-ibm-plex-serif);
+	font-family: var(--font-ibm-plex-serif);
 }
 
 .orange {
-  color: #FF5722;
+	color: #ff5722;
 }
 
 .bg-orange {
-  background-color: #FF5722;
+	background-color: #ff5722;
 }
 
 /* Add underline animation for navbar links */
 .nav-underline {
-  position: relative;
-  overflow: hidden;
+	position: relative;
+	overflow: hidden;
 }
 
 .nav-underline::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
-  height: 2px;
-  background: currentColor;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0%;
+	height: 2px;
+	background: currentColor;
+	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-underline:hover::after,
 .nav-underline:focus-visible::after {
-  width: 100%;
+	width: 100%;
 }
