@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 	import quotes from '$lib/quotes';
+	import { hapticTap, hapticStep } from '$lib/haptics';
 
 	function calculateDuration(startDateStr: string, endDateStr: string): string {
 		const startMonthYear = startDateStr.split(' ');
@@ -89,16 +91,56 @@
 		return durationStr;
 	}
 
-	let randomQuote = '';
+	// The quote card is a deck: every click draws a fresh quote, no repeats
+	// until you've seen them all — and the deck knows when you have.
+	let quote = $state('');
+	let deck: string[] = [];
+	let deckFinished = false;
 
-	function selectRandomQuote() {
-		const randomIndex = Math.floor(Math.random() * quotes.length);
-		randomQuote = quotes[randomIndex];
+	function shuffleDeck() {
+		deck = [...quotes];
+		for (let i = deck.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[deck[i], deck[j]] = [deck[j], deck[i]];
+		}
 	}
 
-	// Select a quote when the component mounts
+	function drawQuote() {
+		if (deck.length === 0) {
+			if (quote && !deckFinished) {
+				deckFinished = true;
+				quote = `…and that’s every quote in the deck — all ${quotes.length} of them. Thank you for listening this closely.`;
+				return;
+			}
+			deckFinished = false;
+			shuffleDeck();
+		}
+		quote = deck.pop()!;
+	}
+
+	function handleQuoteClick() {
+		hapticTap();
+		drawQuote();
+	}
+
+	// THE PERIOD. It ends the first sentence of the site, and it can take
+	// a surprising amount of enthusiasm.
+	let periodPops = $state(0);
+	let periodAnim = $state<'' | 'pop' | 'somersault'>('');
+
+	function popPeriod() {
+		hapticStep();
+		periodPops++;
+		// Retrigger the animation even on rapid clicks
+		periodAnim = '';
+		requestAnimationFrame(() => {
+			periodAnim = periodPops % 5 === 0 ? 'somersault' : 'pop';
+		});
+	}
+
+	// Draw the first quote when the component mounts
 	onMount(() => {
-		selectRandomQuote();
+		drawQuote();
 	});
 
 	const siteUrl = 'https://arihant25.github.io';
@@ -142,37 +184,62 @@
 <div class="md:mx-4">
 	<!-- HERO -->
 	<div class="mx-auto flex flex-col items-center p-4 pt-20 pb-12 sm:px-6 md:flex-row lg:px-8">
-		<h1
-			class="font-ibm-plex-serif mb-6 w-full text-center font-bold md:text-left"
-			style="font-size: min(10vw, 10rem); line-height: 1.2;"
-		>
-			Hi, I am Arihant<span class="orange">.</span>
-		</h1>
+		<div class="w-full text-center md:text-left">
+			<h1
+				class="font-ibm-plex-serif mb-6 font-bold"
+				style="font-size: min(10vw, 10rem); line-height: 1.2;"
+			>
+				Hi, I am <span class="whitespace-nowrap"
+					>Arihant<button
+						class="period orange"
+						class:pop={periodAnim === 'pop'}
+						class:somersault={periodAnim === 'somersault'}
+						onclick={popPeriod}
+						aria-label="The period at the end of the sentence. It does not mind being pressed."
+						>.</button
+					></span
+				>
+			</h1>
+		</div>
 		<p class="max-w-2xl text-justify text-lg leading-relaxed font-light md:ml-24">
-			I'm a Computer Science student and researcher at IIIT Hyderabad. I care about learning things
+			I’m a Computer Science student and researcher at IIIT Hyderabad. I care about learning things
 			properly and building with clarity and purpose. I like working on projects that feel
-			meaningful, and I’m still figuring out what that means for me long-term. I'm also interested
-			in sustainable development, since it is our duty to save our planet's future. Outside of code,
+			meaningful, and I’m still figuring out what that means for me long-term. I’m also interested
+			in sustainable development, since it is our duty to save our planet’s future. Outside of code,
 			I enjoy reading, playing and listening to music, discovering new things, and watching the
 			waves crash on the shore.
 		</p>
 	</div>
 
-	<!-- QUOTE OF THE DAY -->
-	<div
-		class="quote-section relative mx-4 my-12 max-w-3xl rounded-lg border bg-black p-8 shadow-lg sm:mx-auto dark:bg-slate-800"
-	>
-		<div
-			class="font-ibm-plex-serif orange absolute -top-9 left-4 text-9xl font-black"
-			aria-hidden="true"
+	<!-- QUOTE DECK -->
+	<div class="mx-4 my-12 max-w-3xl sm:mx-auto">
+		<button
+			type="button"
+			class="quote-section relative block w-full cursor-pointer rounded-lg border bg-black p-8 pb-10 text-left shadow-lg transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 dark:bg-slate-800"
+			onclick={handleQuoteClick}
+			aria-live="polite"
 		>
-			"
-		</div>
-		<p
-			class="font-ibm-plex-serif relative z-10 text-center text-2xl leading-relaxed text-white italic"
-		>
-			{randomQuote}
-		</p>
+			<div
+				class="font-ibm-plex-serif orange absolute -top-9 left-4 text-9xl font-black"
+				aria-hidden="true"
+			>
+				“
+			</div>
+			{#key quote}
+				<p
+					class="font-ibm-plex-serif relative z-10 text-center text-2xl leading-relaxed text-white italic"
+					in:fly={{ y: 8, duration: 300 }}
+				>
+					{quote}
+				</p>
+			{/key}
+			<span
+				class="quote-hint font-space-mono absolute right-4 bottom-3 text-xs text-white/40"
+				aria-hidden="true"
+			>
+				one more ↻
+			</span>
+		</button>
 	</div>
 
 	<!-- WORK EXPERIENCE -->
@@ -190,7 +257,7 @@
 				/>
 			</div>
 			<div class="order-2 md:order-2 md:w-1/2">
-				<h2 class="mb-2 text-3xl font-bold">Open Source Developers' Group, IIIT Hyderabad</h2>
+				<h2 class="mb-2 text-3xl font-bold">Open Source Developers’ Group, IIIT Hyderabad</h2>
 				<p class="text-lg font-semibold">
 					Coordinator
 					<span class="font-normal">
@@ -206,8 +273,8 @@
 				<p class="mt-2 text-justify text-lg leading-relaxed font-light">
 					I didn't want to stretch myself out too thin joining too many clubs and societies, and
 					ending up not contributing to any of them. So I looked at all the clubs, and I looked at
-					my skils and interests, and decided that I would have the most impact at the Open Source
-					Developer's Group. Hence this has been the only club I applied to and got in in my entire
+					my skills and interests, and decided that I would have the most impact at the Open Source
+					Developers’ Group. Hence this has been the only club I applied to and got in in my entire
 					time at IIIT. As part of the Events team, I took a session on Introduction to Open Source,
 					open at all but aimed primarily at freshers. As part of the Tech team, I helped create the
 					Team Members section of the Club website, making that my first experience with Next.js. In
@@ -354,8 +421,8 @@
 					I joined IIIT Hyderabad in 2023, after getting an All India Rank of 1 in the UGEE exam. It
 					felt like this college was different from the others, like it was calling out to me, and I
 					knew I had to be here. The campus is beautiful, and the people are even better. Yes, it is
-					not always easy. But easy gets boring over time. As they say, "If you're the smartest
-					person in the room, you're in the wrong room." I can't wait to see what the future holds
+					not always easy. But easy gets boring over time. As they say, “If you’re the smartest
+					person in the room, you’re in the wrong room.” I can’t wait to see what the future holds
 					for me here. I am enrolled in the Computer Science dual degree (CSD) programme, so I
 					expect to graduate in 2028.
 				</p>
@@ -363,3 +430,70 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	/* The period: typographically identical to a span, until you press it */
+	.period {
+		display: inline-block;
+		padding: 0;
+		border: none;
+		background: none;
+		font: inherit;
+		line-height: inherit;
+		cursor: pointer;
+		transform-origin: 50% 100%;
+	}
+
+	.period.pop {
+		animation: period-pop 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+	}
+
+	/* Every fifth press earns a somersault */
+	.period.somersault {
+		animation: period-somersault 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	@keyframes period-pop {
+		30% {
+			transform: translateY(-0.18em) scale(1.25, 0.75);
+		}
+		60% {
+			transform: translateY(0) scale(0.85, 1.2);
+		}
+		80% {
+			transform: scale(1.05, 0.95);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	@keyframes period-somersault {
+		40% {
+			transform: translateY(-0.6em) rotate(180deg);
+		}
+		70% {
+			transform: translateY(0) rotate(360deg) scale(1.15, 0.85);
+		}
+		100% {
+			transform: rotate(360deg) scale(1);
+		}
+	}
+
+	.quote-hint {
+		opacity: 0.5;
+		transition: opacity 0.2s ease;
+	}
+
+	.quote-section:hover .quote-hint,
+	.quote-section:focus-visible .quote-hint {
+		opacity: 1;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.period.pop,
+		.period.somersault {
+			animation: none;
+		}
+	}
+</style>

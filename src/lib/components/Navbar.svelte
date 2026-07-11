@@ -101,7 +101,7 @@
 			<img src="/favicon.ico" alt="Logo" class="h-8 w-8" />
 			<a href="/">
 				<span class="font-ibm-plex-serif nav-underline text-2xl tracking-wider"
-					>Arihant's Corner</span
+					>Arihant’s Corner</span
 				>
 			</a>
 		</span>

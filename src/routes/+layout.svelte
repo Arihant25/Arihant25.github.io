@@ -14,6 +14,13 @@
 		} else {
 			setTimeout(preloadSounds, 1000);
 		}
+
+		// A note for the people who open the hood.
+		console.log(
+			'%c“%c\nHi, fellow tinkerer! What are you doing here? The site is open source, snoop around github.com/Arihant25/Arihant25.github.io if you want to see the code.\n',
+			'color: #FF5722; font-family: Georgia, serif; font-size: 48px; font-weight: bold;',
+			'color: inherit; font-family: monospace; font-size: 12px;'
+		);
 	});
 </script>
 
