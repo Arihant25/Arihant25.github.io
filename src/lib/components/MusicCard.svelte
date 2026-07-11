@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { hapticTap } from '$lib/haptics';
+
 	interface Props {
 		coverImage: string;
 		title: string;
@@ -85,6 +87,8 @@
 	}
 
 	function handleClick(event: MouseEvent) {
+		hapticTap();
+
 		// If animation is in progress, prevent default navigation
 		if (isAnimating) {
 			event.preventDefault();

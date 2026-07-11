@@ -4,6 +4,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import EdisonBulb from './EdisonBulb.svelte';
 	import { onMount } from 'svelte';
+	import { hapticGrab, hapticSwitch } from '$lib/haptics';
 
 	const OFFSET = -20;
 	const BOUNCE = 0;
@@ -91,6 +92,8 @@
 	}
 
 	function toggleTheme() {
+		hapticSwitch();
+
 		if (!browser || !document.startViewTransition) {
 			darkMode = !darkMode;
 			return;
@@ -154,6 +157,9 @@
 		// Prevent pull-to-refresh behavior on mobile
 		document.documentElement.style.overscrollBehavior = 'none';
 		document.addEventListener('touchend', handleTouchEnd);
+
+		// The faintest tick as your finger lands on the pull cord
+		hapticGrab();
 
 		dragging = true;
 		initialY = event.touches[0].clientY;

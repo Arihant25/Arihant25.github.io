@@ -5,6 +5,7 @@
 	import 'page-flip/src/Style/stPageFlip.css';
 	import WaveSurfer from 'wavesurfer.js';
 	import { playTudum, playFlip } from '$lib/sounds';
+	import { hapticTudum, hapticFlip, hapticTap, hapticStep } from '$lib/haptics';
 
 	let { data }: { data: PageData } = $props();
 	const { paper } = data;
@@ -30,6 +31,7 @@
 
 		// Tudum! (audio is preloaded from the root layout, so this is instant)
 		playTudum();
+		hapticTudum();
 
 		// Reveal the book as soon as the cover is ready
 		const coverPreload = new Image();
@@ -117,6 +119,7 @@
 			// Skip sound if flipping to/from the first or last page
 			if (currentPage !== 0 && currentPage !== totalPages - 1) {
 				playFlip();
+				hapticFlip();
 			}
 		});
 
@@ -212,18 +215,21 @@
 
 	function togglePlayPause() {
 		if (wavesurfer) {
+			hapticTap();
 			wavesurfer.playPause();
 		}
 	}
 
 	function skipBackward() {
 		if (wavesurfer) {
+			hapticStep();
 			wavesurfer.skip(-10);
 		}
 	}
 
 	function skipForward() {
 		if (wavesurfer) {
+			hapticStep();
 			wavesurfer.skip(10);
 		}
 	}

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { optimized } from '$lib/images';
+	import { hapticTap } from '$lib/haptics';
 
 	interface Project {
 		name: string;
@@ -31,11 +32,6 @@
 	// Check if device is mobile/touch
 	onMount(() => {
 		isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-		// Add haptic feedback for iOS devices
-		if (isMobile && 'vibrate' in navigator) {
-			// Light haptic feedback on touch
-		}
 	});
 
 	function handleClick(event: MouseEvent | TouchEvent) {
@@ -46,10 +42,8 @@
 			return;
 		}
 
-		// Add haptic feedback for mobile
-		if (isMobile && 'vibrate' in navigator) {
-			navigator.vibrate(50); // Light vibration
-		}
+		// Light haptic acknowledgement of the press
+		hapticTap();
 
 		// Add immediate feedback for touch devices
 		if (isMobile) {
