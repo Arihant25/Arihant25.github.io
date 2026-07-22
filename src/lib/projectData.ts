@@ -173,7 +173,7 @@ export const projects: Project[] = [
 	},
 	{
 		name: 'Streaks',
-		codeUrl: 'https://github.com/Arihant25/Streaks',
+		codeUrl: 'https://github.com/Arihant25/streaks',
 		deployedUrl: 'https://play.google.com/store/apps/details?id=com.arihant.streaks',
 		coverImage: '/projects/streaks/streaks.png',
 		screenshots: [
