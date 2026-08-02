@@ -7,6 +7,7 @@
 		"dev": "node optimize-assets.js && vite dev",
 		"build": "node optimize-assets.js && vite build",
 		"preview": "vite preview",
+		"postinstall": "node scripts/repair-bun-debug.js",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -22,6 +23,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
+		"debug": "^4.4.3",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
@@ -42,6 +44,9 @@
 		"page-flip": "^2.0.7",
 		"wavesurfer.js": "^7.12.1",
 		"web-haptics": "^0.0.6"
+	},
+	"overrides": {
+		"debug": "4.4.3"
 	},
 	"trustedDependencies": [
 		"@tailwindcss/oxide"

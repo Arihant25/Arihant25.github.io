@@ -13,6 +13,23 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'Chargle',
+		codeUrl: 'https://github.com/Arihant25/Chargle',
+		deployedUrl: 'https://arihant25.github.io/Chargle/',
+		coverImage: '/projects/chargle/chargle-1.png',
+		screenshots: [
+			'/projects/chargle/chargle-2.png',
+			'/projects/chargle/chargle-3.png',
+			'/projects/chargle/chargle-4.png'
+		],
+		description:
+			"One Sunday afternoon I was just reading some research papers when I noticed my laptop was at 7% charge. I quickly grabbed my charger and plugged it in, and that's when a thought occurred to me. Why don't most Windows laptops make a sound when the charger is connected or disconnected? Certain fruity laptops do that, and it sounds satisfying to hear that little chime. After doing some research, I found that one can just write an AutoHotkey script for this, but most users are not aware of that. To simplify it for myself and for them, I decided to make my first Windows application for this. I wanted it to be lightweight and look modern, following all the best practices. I hopped on to Claude Opus 5 and worked with it to build the app. The hardest part was getting the fruity sound just right. I experimented with various sound generating codes and finally settled on one that mostly resembles the original chime.\n\nWhile building the UI, one interesting bug I encountered was that it would play a loud feedback-type buzz instead of the real sounds. It turned out to be one line in the mixer. NAudio passes you a `float[]` that is really a `byte[]` underneath, because it overlays both array types at the same memory address so the same buffer can be read either way. Reading and writing through the `float[]` reference steps four bytes at a time, since the compiler goes by the declared type. `Array.Clear` does not do that. It looks at what the object actually is at runtime and clears that many *bytes*. So every time the mixer thought it was wiping 960 floats, it was really wiping 960 bytes, leaving three quarters of the buffer still holding the previous fragment of audio. The sound card dutifully played that fragment again on every callback, which is where the buzz came from. Replacing `Array.Clear` with a plain `for` loop fixed it.\n\nSince Claude can't hear audio, what actually found the bug was a small tool it wrote that plays a sound, records the speakers back through WASAPI loopback, and prints the level every 50 milliseconds. The numbers showed the output rising for the chime and then sitting at a constant level forever instead of falling back to silence. This is what led to finding the gnarly bug.",
+		shortDescription: 'A simple Windows app that plays a sound when your charger is connected or disconnected',
+		year: 2026,
+		technologies: ['C#', 'WinUI 3', '.NET', 'NAudio'],
+		slug: 'chargle'
+	},
+	{
 		name: 'DecidArch',
 		codeUrl: 'https://github.com/Arihant25/decidarch',
 		coverImage: '/projects/decidarch/decidarch-1.png',
