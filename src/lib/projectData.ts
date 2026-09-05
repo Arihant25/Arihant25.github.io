@@ -13,6 +13,25 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'Boli',
+		codeUrl: 'https://github.com/Arihant25/boli',
+		deployedUrl: 'https://arihant25.github.io/boli/',
+		coverImage: '/projects/boli/boli-1.png',
+		screenshots: [
+			'/projects/boli/boli-2.png',
+			'/projects/boli/boli-3.png',
+			'/projects/boli/boli-4.png',
+			'/projects/boli/boli-5.png'
+		],
+		description:
+			"I have always wanted to learn to read and write my native language, Odia, but could never get into it. So I made a gamified teaching website that teaches Odia, Punjabi and Telugu alphabets with sounds. The last two were requests from friends.\n\nIt introduces the letters and vowel signs a few at a time, ties each one to a sound you already know, and then has you read them back. Once you know enough letters, reading lessons unlock and you start sounding out real words. Under the hood it uses spaced repetition, so the letters you keep getting wrong come back sooner and more often, and the ones you know drift further apart. Every letter and word has its pronunciation bundled in, so audio works offline. Everything is stored on your own device, so there is no account and nothing is sent anywhere.",
+		shortDescription:
+			'A gamified site that teaches you to read Odia, Telugu and Punjabi if you already speak them',
+		year: 2026,
+		technologies: ['Vanilla JS', 'HTML', 'CSS', 'Service Worker'],
+		slug: 'boli'
+	},
+	{
 		name: 'Chargle',
 		codeUrl: 'https://github.com/Arihant25/Chargle',
 		deployedUrl: 'https://arihant25.github.io/Chargle/',
