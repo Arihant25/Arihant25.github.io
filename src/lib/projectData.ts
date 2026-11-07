@@ -13,35 +13,18 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		name: 'SERC Resource Tracker',
-		codeUrl: 'https://github.com/Arihant25/serc-resource-tracker',
-		deployedUrl: 'https://serc-resource-tracker.vercel.app/',
-		coverImage: '/projects/serc-resource-tracker/serc-resource-tracker-1.png',
-		screenshots: ['/projects/serc-resource-tracker/serc-resource-tracker-2.png'],
+		name: 'Usage Dock for Claude Code',
+		codeUrl: 'https://github.com/Arihant25/claude-usage-dock',
+		deployedUrl: 'https://apps.microsoft.com/detail/9NR3VBPN0XNM',
+		coverImage: '/projects/claude-usage-dock/cover.png',
+		screenshots: ['/projects/claude-usage-dock/dock.png', '/projects/claude-usage-dock/flyout.png'],
 		description:
-			"Our lab at SERC has several machines that can be used by any student. So I made a resource tracker website that lets people reserve machines, clearly shows who's using what, and also has analytics. I also created a Discord bot that regularly checks if the machines are actually in use or idle for more than 2 hours, and edits its message on a channel in the lab server.",
+			"I kept running into my Claude Code usage limits in the middle of work. Checking `/usage` every few minutes got annoying, so I wanted a way to see how much I had left without having to stop what I was doing.\n\nI was already using the Dock in PowerToys Command Palette, a small bar at the top of the screen that shows CPU, GPU and network usage. I decided to make an extension that shows my Claude Code 5-hour and weekly usage limits alongside them.\n\nThe extension displays each limit as a small ring that fills up as usage increases. It turns amber at 80% and red at 95%. Clicking on it shows the usage for both windows, along with their exact reset times.\n\nIt doesn't need access to your Claude login or make any API calls. Claude Code already exposes usage information through its status line. The extension adds a small bridge in front of your existing status line to capture these numbers and pass them to the Dock. Your original status line continues to work as before.",
 		shortDescription:
-			'Live availability and reservations for shared lab machines, plus a Discord bot that pings when one is idle',
+			'A PowerToys Command Palette extension that shows your Claude Code 5-hour and weekly limits in the Dock',
 		year: 2026,
-		technologies: ['Next.js', 'TypeScript', 'MongoDB', 'Python', 'Prometheus', 'Grafana', 'Discord'],
-		slug: 'serc-resource-tracker'
-	},
-	{
-		name: "Arihant's Food Journal",
-		codeUrl: 'https://github.com/Arihant25/arihants-food-journal',
-		deployedUrl: 'https://arihants-food-journal.vercel.app/',
-		coverImage: '/projects/arihants-food-journal/journal-1.png',
-		screenshots: [
-			'/projects/arihants-food-journal/journal-2.png',
-			'/projects/arihants-food-journal/journal-3.png',
-			'/projects/arihants-food-journal/journal-4.png'
-		],
-		description:
-			"I wanted a simple way to keep track of what I was eating without manually entering every nutritional detail. Arihant's Food Journal is a food tracking web app that uses an LLM to help with food logging and completion. It makes recording meals easier while keeping track of daily food intake and nutrition.",
-		shortDescription: 'A food tracking web app that uses an LLM to fill in nutrition values for you',
-		year: 2026,
-		technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Recharts', 'LLM'],
-		slug: 'arihants-food-journal'
+		technologies: ['C#', '.NET', 'WinRT', 'PowerToys', 'MSIX'],
+		slug: 'claude-usage-dock'
 	},
 	{
 		name: 'Is It Down',
@@ -55,20 +38,6 @@ export const projects: Project[] = [
 		year: 2026,
 		technologies: ['JavaScript', 'HTML', 'Python', 'Raspberry Pi'],
 		slug: 'is-it-down'
-	},
-	{
-		name: 'Usage Dock for Claude Code',
-		codeUrl: 'https://github.com/Arihant25/claude-usage-dock',
-		deployedUrl: 'https://github.com/Arihant25/claude-usage-dock/releases/latest',
-		coverImage: '/projects/claude-usage-dock/cover.png',
-		screenshots: ['/projects/claude-usage-dock/dock.png', '/projects/claude-usage-dock/flyout.png'],
-		description:
-			"I kept running into my Claude Code usage limits in the middle of work. Checking `/usage` every few minutes got annoying, so I wanted a way to see how much I had left without having to stop what I was doing.\n\nI was already using the Dock in PowerToys Command Palette, a small bar at the top of the screen that shows CPU, GPU and network usage. I decided to make an extension that shows my Claude Code 5-hour and weekly usage limits alongside them.\n\nThe extension displays each limit as a small ring that fills up as usage increases. It turns amber at 80% and red at 95%. Clicking on it shows the usage for both windows, along with their exact reset times.\n\nIt doesn't need access to your Claude login or make any API calls. Claude Code already exposes usage information through its status line. The extension adds a small bridge in front of your existing status line to capture these numbers and pass them to the Dock. Your original status line continues to work as before.",
-		shortDescription:
-			'A PowerToys Command Palette extension that shows your Claude Code 5-hour and weekly limits in the Dock',
-		year: 2026,
-		technologies: ['C#', '.NET', 'WinRT', 'PowerToys', 'MSIX'],
-		slug: 'claude-usage-dock'
 	},
 	{
 		name: 'Boli',
@@ -107,6 +76,23 @@ export const projects: Project[] = [
 		slug: 'chargle'
 	},
 	{
+		name: "Arihant's Food Journal",
+		codeUrl: 'https://github.com/Arihant25/arihants-food-journal',
+		deployedUrl: 'https://arihants-food-journal.vercel.app/',
+		coverImage: '/projects/arihants-food-journal/journal-1.png',
+		screenshots: [
+			'/projects/arihants-food-journal/journal-2.png',
+			'/projects/arihants-food-journal/journal-3.png',
+			'/projects/arihants-food-journal/journal-4.png'
+		],
+		description:
+			"I wanted a simple way to keep track of what I was eating without manually entering every nutritional detail. Arihant's Food Journal is a food tracking web app that uses an LLM to help with food logging and completion. It makes recording meals easier while keeping track of daily food intake and nutrition.",
+		shortDescription: 'A food tracking web app that uses an LLM to fill in nutrition values for you',
+		year: 2026,
+		technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Recharts', 'LLM'],
+		slug: 'arihants-food-journal'
+	},
+	{
 		name: 'DecidArch',
 		codeUrl: 'https://github.com/Arihant25/decidarch',
 		coverImage: '/projects/decidarch/decidarch-1.png',
@@ -123,22 +109,6 @@ export const projects: Project[] = [
 		slug: 'decidarch'
 	},
 	{
-		name: 'Quoty',
-		codeUrl: 'https://github.com/Arihant25/quoty',
-		deployedUrl: 'https://chromewebstore.google.com/detail/quoty/napjbhgffnpcdaebebhnoiffjgeegbed',
-		coverImage: '/projects/quoty/quoty-1.png',
-		screenshots: [
-			'/projects/quoty/quoty-2.png',
-			'/projects/quoty/quoty-3.png'
-		],
-		description:
-			"I was procrastinating instead of studying for my end semester examinations, and I found myself using ChatGPT frequently, so I thought of finally making this project that I wanted to for many months.",
-		shortDescription: 'A browser extension that replaces the ChatGPT home screen quote with your own content',
-		year: 2026,
-		technologies: ['JavaScript', 'Chrome Extension API', 'HTML', 'CSS'],
-		slug: 'quoty'
-	},
-	{
 		name: 'pyterametrics',
 		codeUrl: 'https://github.com/Arihant25/pyterametrics/',
 		deployedUrl: 'https://pypi.org/project/pyterametrics/',
@@ -149,6 +119,20 @@ export const projects: Project[] = [
 		year: 2026,
 		technologies: ['Python', 'Terraform'],
 		slug: 'pyterametrics'
+	},
+	{
+		name: 'SERC Resource Tracker',
+		codeUrl: 'https://github.com/Arihant25/serc-resource-tracker',
+		deployedUrl: 'https://serc-resource-tracker.vercel.app/',
+		coverImage: '/projects/serc-resource-tracker/serc-resource-tracker-1.png',
+		screenshots: ['/projects/serc-resource-tracker/serc-resource-tracker-2.png'],
+		description:
+			"Our lab at SERC has several machines that can be used by any student. So I made a resource tracker website that lets people reserve machines, clearly shows who's using what, and also has analytics. I also created a Discord bot that regularly checks if the machines are actually in use or idle for more than 2 hours, and edits its message on a channel in the lab server.",
+		shortDescription:
+			'Live availability and reservations for shared lab machines, plus a Discord bot that pings when one is idle',
+		year: 2026,
+		technologies: ['Next.js', 'TypeScript', 'MongoDB', 'Python', 'Prometheus', 'Grafana', 'Discord'],
+		slug: 'serc-resource-tracker'
 	},
 	{
 		name: "Is It Open?",
@@ -184,23 +168,6 @@ export const projects: Project[] = [
 		slug: 'isec-26'
 	},
 	{
-		name: 'MyIIIT App',
-		coverImage: '/projects/myiiit/myiiit-1.png',
-		screenshots: [
-			'/projects/myiiit/myiiit-2.png',
-			'/projects/myiiit/myiiit-3.png',
-			'/projects/myiiit/myiiit-4.png',
-			'/projects/myiiit/myiiit-5.png'
-		],
-		deployedUrl: 'https://ims-app.iiit.ac.in/',
-		description:
-			'MyIIIT is a mobile application that was built completely by students in 2023 as a project in the Design and Analysis of Softare Systems Course. It was built using React Native and deployed on the Google Play Store and Apple App Store. The backend uses FastAPI. I and a couple of my friends were asked to continue work on it by our seniors, and help maintain it. We started with redesigning the UI to look more polished and modern. Now, we are adding more features as requirements arise. I also helped in conducting interviews and recruiting new members to the team. One of the biggest contributions I made is adding Firebase notifications for background updates. This was also my first time working with Firebase.',
-		shortDescription: 'The official mobile app of IIITH.',
-		year: 2025,
-		technologies: ['React Native', 'FastAPI', 'Firebase'],
-		slug: 'myiiit'
-	},
-	{
 		name: 'SustAInd Website',
 		deployedUrl: 'https://sa4s-serc.github.io/sustaind/',
 		coverImage: '/projects/sustaind/sustaind-1.png',
@@ -231,22 +198,6 @@ export const projects: Project[] = [
 		year: 2025,
 		technologies: ['SvelteKit', 'TailwindCSS'],
 		slug: 'cos'
-	},
-	{
-		name: 'Dentimplant',
-		deployedUrl: 'https://dentimplant.co.in',
-		coverImage: '/projects/dentimplant/dentimplant-1.png',
-		screenshots: [
-			'/projects/dentimplant/dentimplant-2.png',
-			'/projects/dentimplant/dentimplant-3.png',
-			'/projects/dentimplant/dentimplant-4.png'
-		],
-		description:
-			'Dentimplant is an additional service provided by the Affordable Implant Dentistry (AID) initiative started by my father. It allows dentists to completely manage their implant practice online, from keeping track of all their patients and their treatments, to keeping a record of their inventory and finances.',
-		shortDescription: 'Implant practice management platform for dentists',
-		year: 2025,
-		technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'MongoDB'],
-		slug: 'dentimplant'
 	},
 	{
 		name: 'LeetCode Tracker',
@@ -284,6 +235,39 @@ export const projects: Project[] = [
 		year: 2025,
 		technologies: ['Kotlin', 'Android Studio'],
 		slug: 'again'
+	},
+	{
+		name: 'Dentimplant',
+		deployedUrl: 'https://dentimplant.co.in',
+		coverImage: '/projects/dentimplant/dentimplant-1.png',
+		screenshots: [
+			'/projects/dentimplant/dentimplant-2.png',
+			'/projects/dentimplant/dentimplant-3.png',
+			'/projects/dentimplant/dentimplant-4.png'
+		],
+		description:
+			'Dentimplant is an additional service provided by the Affordable Implant Dentistry (AID) initiative started by my father. It allows dentists to completely manage their implant practice online, from keeping track of all their patients and their treatments, to keeping a record of their inventory and finances.',
+		shortDescription: 'Implant practice management platform for dentists',
+		year: 2025,
+		technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'MongoDB'],
+		slug: 'dentimplant'
+	},
+	{
+		name: 'MyIIIT App',
+		coverImage: '/projects/myiiit/myiiit-1.png',
+		screenshots: [
+			'/projects/myiiit/myiiit-2.png',
+			'/projects/myiiit/myiiit-3.png',
+			'/projects/myiiit/myiiit-4.png',
+			'/projects/myiiit/myiiit-5.png'
+		],
+		deployedUrl: 'https://ims-app.iiit.ac.in/',
+		description:
+			'MyIIIT is a mobile application that was built completely by students in 2023 as a project in the Design and Analysis of Softare Systems Course. It was built using React Native and deployed on the Google Play Store and Apple App Store. The backend uses FastAPI. I and a couple of my friends were asked to continue work on it by our seniors, and help maintain it. We started with redesigning the UI to look more polished and modern. Now, we are adding more features as requirements arise. I also helped in conducting interviews and recruiting new members to the team. One of the biggest contributions I made is adding Firebase notifications for background updates. This was also my first time working with Firebase.',
+		shortDescription: 'The official mobile app of IIITH.',
+		year: 2025,
+		technologies: ['React Native', 'FastAPI', 'Firebase'],
+		slug: 'myiiit'
 	},
 	{
 		name: 'boxed',
@@ -333,22 +317,25 @@ export const projects: Project[] = [
 		slug: 'ihs-marks-analyzer'
 	},
 	{
-		name: 'SERC Website',
-		codeUrl: 'https://github.com/avi1o1/SERC-Website',
-		deployedUrl: 'https://serc.iiit.ac.in/',
-		coverImage: '/projects/serc-website/serc-website1.png',
+		name: 'Saathi',
+		codeUrl: 'https://github.com/Arihant25/saathi',
+		deployedUrl: 'https://saathi-eight.vercel.app/',
+		coverImage: '/projects/saathi/saathi1.png',
 		screenshots: [
-			'/projects/serc-website/serc-website2.png',
-			'/projects/serc-website/serc-website3.png',
-			'/projects/serc-website/serc-website4.png',
-			'/projects/serc-website/serc-website5.png'
+			'/projects/saathi/saathi2.png',
+			'/projects/saathi/saathi3.png',
+			'/projects/saathi/saathi4.png',
+			'/projects/saathi/saathi5.png',
+			'/projects/saathi/saathi6.png',
+			'/projects/saathi/saathi7.png',
+			'/projects/saathi/saathi8.png'
 		],
 		description:
-			"The previous SERC website was outdated and built with a drag-and-drop editor, which did not reflect the standards of IIIT Hyderabad's premier software engineering lab. Recognizing this, we undertook a complete redesign from the ground up, focusing on modern aesthetics and robust design principles. The result is a visually appealing, user-friendly, and technically sound website that better represents the lab's mission and activities. This project was a collaborative effort with Aviral Gupta and Mohit Kumar Singh.",
-		shortDescription: 'Official website of the Software Engineering Research Center',
+			"This was our winning submission for the HackIIIT Hackathon organised by the Open Source Developers' Group of IIIT Hyderabad. It is a mental health wellness platform that consists of gamification, anonymous community forums, meditation and yoga sessions, book and music recommendations, and all of this is powered by an agentic AI system. The agentic AI system remembers the user's mood progression throughout time, and the apps theme subtly changes to accommodate for it too. The framework for the agentic AI is MOYA, made by the startup MontyCloud, who also sponsored the event and set the problem statements. My team consisted of Aviral Gupta, Inesh Dheer, Shreyas Deb, and Shreyas Mehta. We won the prize for Best Product in the hackathon, and internship offers at MontyCloud.",
+		shortDescription: 'Agentic AI mental health wellness app',
 		year: 2025,
-		technologies: ['Next.js', 'Typescript', 'ESLint', 'TailwindCSS'],
-		slug: 'serc-website'
+		technologies: ['Next.js', 'FastAPI', 'GPT-4'],
+		slug: 'saathi'
 	},
 	{
 		name: 'YADA',
@@ -370,25 +357,22 @@ export const projects: Project[] = [
 		slug: 'yada'
 	},
 	{
-		name: 'Saathi',
-		codeUrl: 'https://github.com/Arihant25/saathi',
-		deployedUrl: 'https://saathi-eight.vercel.app/',
-		coverImage: '/projects/saathi/saathi1.png',
+		name: 'SERC Website',
+		codeUrl: 'https://github.com/avi1o1/SERC-Website',
+		deployedUrl: 'https://serc.iiit.ac.in/',
+		coverImage: '/projects/serc-website/serc-website1.png',
 		screenshots: [
-			'/projects/saathi/saathi2.png',
-			'/projects/saathi/saathi3.png',
-			'/projects/saathi/saathi4.png',
-			'/projects/saathi/saathi5.png',
-			'/projects/saathi/saathi6.png',
-			'/projects/saathi/saathi7.png',
-			'/projects/saathi/saathi8.png'
+			'/projects/serc-website/serc-website2.png',
+			'/projects/serc-website/serc-website3.png',
+			'/projects/serc-website/serc-website4.png',
+			'/projects/serc-website/serc-website5.png'
 		],
 		description:
-			"This was our winning submission for the HackIIIT Hackathon organised by the Open Source Developers' Group of IIIT Hyderabad. It is a mental health wellness platform that consists of gamification, anonymous community forums, meditation and yoga sessions, book and music recommendations, and all of this is powered by an agentic AI system. The agentic AI system remembers the user's mood progression throughout time, and the apps theme subtly changes to accommodate for it too. The framework for the agentic AI is MOYA, made by the startup MontyCloud, who also sponsored the event and set the problem statements. My team consisted of Aviral Gupta, Inesh Dheer, Shreyas Deb, and Shreyas Mehta. We won the prize for Best Product in the hackathon, and internship offers at MontyCloud.",
-		shortDescription: 'Agentic AI mental health wellness app',
+			"The previous SERC website was outdated and built with a drag-and-drop editor, which did not reflect the standards of IIIT Hyderabad's premier software engineering lab. Recognizing this, we undertook a complete redesign from the ground up, focusing on modern aesthetics and robust design principles. The result is a visually appealing, user-friendly, and technically sound website that better represents the lab's mission and activities. This project was a collaborative effort with Aviral Gupta and Mohit Kumar Singh.",
+		shortDescription: 'Official website of the Software Engineering Research Center',
 		year: 2025,
-		technologies: ['Next.js', 'FastAPI', 'GPT-4'],
-		slug: 'saathi'
+		technologies: ['Next.js', 'Typescript', 'ESLint', 'TailwindCSS'],
+		slug: 'serc-website'
 	},
 	{
 		name: 'Treasure Trove',
@@ -424,6 +408,60 @@ export const projects: Project[] = [
 		slug: 'wikimedia-alert'
 	},
 	{
+		name: 'AdvantEdge NFS',
+		codeUrl: 'https://github.com/avi1o1/AdvantEdge',
+		coverImage: '/projects/advantedge-nfs/advantedge1.png',
+		screenshots: [
+			'/projects/advantedge-nfs/advantedge2.png',
+			'/projects/advantedge-nfs/advantedge3.png'
+		],
+		description:
+			'This was the course project of Operating Systems and Networks in Monsoon 2024, at IIIT-H. It is a network file system, that has three components - clients, naming servers, and storage servers. The naming server facilitates the connection between multiple clients and storage servers. This has redundancy built in, so data is backed up across storage servers. It is also scalable and can accommodate a huge number of servers. It can even stream files over the network. This was made in collaboration with Anirudh Sankar, Aviral Gupta, and Mohit Kumar Singh.',
+		shortDescription: 'A scalable network file system written in C',
+		year: 2024,
+		technologies: ['C', 'Linux', 'Makefile', 'Doxygen', 'Network Programming'],
+		slug: 'advantedge-nfs'
+	},
+	{
+		name: 'Quoty',
+		codeUrl: 'https://github.com/Arihant25/quoty',
+		deployedUrl: 'https://chromewebstore.google.com/detail/quoty/napjbhgffnpcdaebebhnoiffjgeegbed',
+		coverImage: '/projects/quoty/quoty-1.png',
+		screenshots: [
+			'/projects/quoty/quoty-2.png',
+			'/projects/quoty/quoty-3.png'
+		],
+		description:
+			"I was procrastinating instead of studying for my end semester examinations, and I found myself using ChatGPT frequently, so I thought of finally making this project that I wanted to for many months.",
+		shortDescription: 'A browser extension that replaces the ChatGPT home screen quote with your own content',
+		year: 2026,
+		technologies: ['JavaScript', 'Chrome Extension API', 'HTML', 'CSS'],
+		slug: 'quoty'
+	},
+	{
+		name: 'Fallen Guys',
+		codeUrl: 'https://github.com/Arihant25/fallen-guys',
+		deployedUrl: 'https://arihant25.github.io/fallen-guys/src/html/index.html',
+		coverImage: '/projects/fallen-guys/fallen-guys1.png',
+		description:
+			'A fall detection system using IoT devices that alerts caregivers when a fall is detected for elderly care. Our system detects falls in real-time and alerts caregivers. It includes an accelerometer and GPS sensors under the hood, and has a custom designed 3D printed case, which won an award in a 3D design competition in college. This was the course project of the course Embedded Systems Workshop Monsoon 2024 at IIIT Hyderabad. This was made in collaboration with Anirudh Sankar, Aviral Gupta, and Mohit Kumar Singh. ',
+		shortDescription: 'A fall detection system using IoT',
+		year: 2024,
+		technologies: ['ESP32', 'HTML', 'CSS', 'JavaScript'],
+		slug: 'fallen-guys'
+	},
+	{
+		name: 'arihant.sh',
+		codeUrl: 'https://github.com/Arihant25/arihant.sh',
+		coverImage: '/projects/arihant.sh/arihant.sh1.png',
+		description:
+			'A custom shell implemented in low-level C, supporting pipes, redirection, and common shell operations. This was an individual assignment for the Operating Systems and Networks Monsoon 2024 course, and I took 60 hours to complete it.',
+		shortDescription: 'A custom shell in low level C',
+		year: 2024,
+		technologies: ['C', 'Operating Systems', 'Unix'],
+		slug: 'arihant-shell'
+	},
+	{
 		name: 'Sports Council Website',
 		codeUrl: 'https://github.com/Arihant25/sports-council-iiith',
 		deployedUrl: 'https://sports.iiit.ac.in',
@@ -441,42 +479,29 @@ export const projects: Project[] = [
 		slug: 'sports-council-website'
 	},
 	{
-		name: 'AdvantEdge NFS',
-		codeUrl: 'https://github.com/avi1o1/AdvantEdge',
-		coverImage: '/projects/advantedge-nfs/advantedge1.png',
-		screenshots: [
-			'/projects/advantedge-nfs/advantedge2.png',
-			'/projects/advantedge-nfs/advantedge3.png'
-		],
+		name: 'Fuse',
+		codeUrl: 'https://github.com/Arihant25/fuse',
+		deployedUrl: 'https://fuse-wqrs.onrender.com/',
+		coverImage: '/projects/fuse/fuse1.png',
+		screenshots: ['/projects/fuse/fuse2.png'],
 		description:
-			'This was the course project of Operating Systems and Networks in Monsoon 2024, at IIIT-H. It is a network file system, that has three components - clients, naming servers, and storage servers. The naming server facilitates the connection between multiple clients and storage servers. This has redundancy built in, so data is backed up across storage servers. It is also scalable and can accommodate a huge number of servers. It can even stream files over the network. This was made in collaboration with Anirudh Sankar, Aviral Gupta, and Mohit Kumar Singh.',
-		shortDescription: 'A scalable network file system written in C',
+			'This was a course project for the course Introduction to Software Systems in Spring 2024. It takes in images in any format, and outputs a video in a variety of formats and resolutions. One can add sounds from the library, or upload their own, and also diverse transitions between images. It uses FFMPEG under the hood to process videos in parallel, but the real selling point of this application is its UI and UX. This was made in collaboration with Team Code Fusion, consisting of Aviral Gupta and Mohit Kumar Singh. A hilarious bug caused all images to be widened, and we left it in because it made every video 10x better.',
+		shortDescription: 'Image to video convertor in vanilla web technologies',
 		year: 2024,
-		technologies: ['C', 'Linux', 'Makefile', 'Doxygen', 'Network Programming'],
-		slug: 'advantedge-nfs'
+		technologies: ['Flask', 'HTML', 'CSS', 'JavaScript'],
+		slug: 'fuse'
 	},
 	{
-		name: 'arihant.sh',
-		codeUrl: 'https://github.com/Arihant25/arihant.sh',
-		coverImage: '/projects/arihant.sh/arihant.sh1.png',
+		name: 'Fiery',
+		codeUrl: 'https://github.com/unignoramus11/fiery',
+		deployedUrl: 'https://unignoramus11.github.io/fiery/src/html/index.html',
+		coverImage: '/projects/fiery/fiery1.png',
 		description:
-			'A custom shell implemented in low-level C, supporting pipes, redirection, and common shell operations. This was an individual assignment for the Operating Systems and Networks Monsoon 2024 course, and I took 60 hours to complete it.',
-		shortDescription: 'A custom shell in low level C',
+			'Fire detection system using IoT sensors and to provide early warnings and alerts. It consisted of an ESP32 microcontroller, connected to various sensors like smoke sensor, flame sensor, etc. I contributed to this project by making the dashboard, which contained the metrics from all the sensors, and alerted users in case of fire. It was the course project for Introduction to IoT Sprint 2024. This was made in collaboration with Karthik Malavathula, Aviral Gupta, and Mohit Kumar Singh.',
+		shortDescription: 'Fire detection system using IoT',
 		year: 2024,
-		technologies: ['C', 'Operating Systems', 'Unix'],
-		slug: 'arihant-shell'
-	},
-	{
-		name: 'Fallen Guys',
-		codeUrl: 'https://github.com/Arihant25/fallen-guys',
-		deployedUrl: 'https://arihant25.github.io/fallen-guys/src/html/index.html',
-		coverImage: '/projects/fallen-guys/fallen-guys1.png',
-		description:
-			'A fall detection system using IoT devices that alerts caregivers when a fall is detected for elderly care. Our system detects falls in real-time and alerts caregivers. It includes an accelerometer and GPS sensors under the hood, and has a custom designed 3D printed case, which won an award in a 3D design competition in college. This was the course project of the course Embedded Systems Workshop Monsoon 2024 at IIIT Hyderabad. This was made in collaboration with Anirudh Sankar, Aviral Gupta, and Mohit Kumar Singh. ',
-		shortDescription: 'A fall detection system using IoT',
-		year: 2024,
-		technologies: ['ESP32', 'HTML', 'CSS', 'JavaScript'],
-		slug: 'fallen-guys'
+		technologies: ['ESP32', 'IoT', 'HTML', 'CSS', 'JavaScript'],
+		slug: 'fiery'
 	},
 	{
 		name: 'GradR',
@@ -495,31 +520,6 @@ export const projects: Project[] = [
 		year: 2024,
 		technologies: ['Next.js', 'TailwindCSS', 'TypeScript'],
 		slug: 'gradr'
-	},
-	{
-		name: 'Fiery',
-		codeUrl: 'https://github.com/unignoramus11/fiery',
-		deployedUrl: 'https://unignoramus11.github.io/fiery/src/html/index.html',
-		coverImage: '/projects/fiery/fiery1.png',
-		description:
-			'Fire detection system using IoT sensors and to provide early warnings and alerts. It consisted of an ESP32 microcontroller, connected to various sensors like smoke sensor, flame sensor, etc. I contributed to this project by making the dashboard, which contained the metrics from all the sensors, and alerted users in case of fire. It was the course project for Introduction to IoT Sprint 2024. This was made in collaboration with Karthik Malavathula, Aviral Gupta, and Mohit Kumar Singh.',
-		shortDescription: 'Fire detection system using IoT',
-		year: 2024,
-		technologies: ['ESP32', 'IoT', 'HTML', 'CSS', 'JavaScript'],
-		slug: 'fiery'
-	},
-	{
-		name: 'Fuse',
-		codeUrl: 'https://github.com/Arihant25/fuse',
-		deployedUrl: 'https://fuse-wqrs.onrender.com/',
-		coverImage: '/projects/fuse/fuse1.png',
-		screenshots: ['/projects/fuse/fuse2.png'],
-		description:
-			'This was a course project for the course Introduction to Software Systems in Spring 2024. It takes in images in any format, and outputs a video in a variety of formats and resolutions. One can add sounds from the library, or upload their own, and also diverse transitions between images. It uses FFMPEG under the hood to process videos in parallel, but the real selling point of this application is its UI and UX. This was made in collaboration with Team Code Fusion, consisting of Aviral Gupta and Mohit Kumar Singh. A hilarious bug caused all images to be widened, and we left it in because it made every video 10x better.',
-		shortDescription: 'Image to video convertor in vanilla web technologies',
-		year: 2024,
-		technologies: ['Flask', 'HTML', 'CSS', 'JavaScript'],
-		slug: 'fuse'
 	},
 	{
 		name: 'inkvent',
