@@ -13,6 +13,64 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'SERC Resource Tracker',
+		codeUrl: 'https://github.com/Arihant25/serc-resource-tracker',
+		deployedUrl: 'https://serc-resource-tracker.vercel.app/',
+		coverImage: '/projects/serc-resource-tracker/serc-resource-tracker-1.png',
+		screenshots: ['/projects/serc-resource-tracker/serc-resource-tracker-2.png'],
+		description:
+			"Our lab at SERC has several machines that can be used by any student. So I made a resource tracker website that lets people reserve machines, clearly shows who's using what, and also has analytics. I also created a Discord bot that regularly checks if the machines are actually in use or idle for more than 2 hours, and edits its message on a channel in the lab server.",
+		shortDescription:
+			'Live availability and reservations for shared lab machines, plus a Discord bot that pings when one is idle',
+		year: 2026,
+		technologies: ['Next.js', 'TypeScript', 'MongoDB', 'Python', 'Prometheus', 'Grafana', 'Discord'],
+		slug: 'serc-resource-tracker'
+	},
+	{
+		name: "Arihant's Food Journal",
+		codeUrl: 'https://github.com/Arihant25/arihants-food-journal',
+		deployedUrl: 'https://arihants-food-journal.vercel.app/',
+		coverImage: '/projects/arihants-food-journal/journal-1.png',
+		screenshots: [
+			'/projects/arihants-food-journal/journal-2.png',
+			'/projects/arihants-food-journal/journal-3.png',
+			'/projects/arihants-food-journal/journal-4.png'
+		],
+		description:
+			"I wanted a simple way to keep track of what I was eating without manually entering every nutritional detail. Arihant's Food Journal is a food tracking web app that uses an LLM to help with food logging and completion. It makes recording meals easier while keeping track of daily food intake and nutrition.",
+		shortDescription: 'A food tracking web app that uses an LLM to fill in nutrition values for you',
+		year: 2026,
+		technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Recharts', 'LLM'],
+		slug: 'arihants-food-journal'
+	},
+	{
+		name: 'Is It Down',
+		codeUrl: 'https://github.com/Arihant25/is-it-down',
+		deployedUrl: 'https://arihant25.github.io/is-it-down/',
+		coverImage: '/projects/is-it-down/is-it-down-1.png',
+		screenshots: ['/projects/is-it-down/is-it-down-2.png', '/projects/is-it-down/is-it-down-3.png'],
+		description:
+			"I wanted a simple way to check whether the IIITH network was having problems, instead of having to ask around whenever the internet stopped working. Is It Down tracks the status of the IIITH LAN, including network availability, speed and outage history. It gives students a place to check whether the problem is with their own connection or something affecting the wider network.",
+		shortDescription: 'Live status, speed and outage history of the IIIT Hyderabad LAN',
+		year: 2026,
+		technologies: ['JavaScript', 'HTML', 'Python', 'Raspberry Pi'],
+		slug: 'is-it-down'
+	},
+	{
+		name: 'Usage Dock for Claude Code',
+		codeUrl: 'https://github.com/Arihant25/claude-usage-dock',
+		deployedUrl: 'https://github.com/Arihant25/claude-usage-dock/releases/latest',
+		coverImage: '/projects/claude-usage-dock/cover.png',
+		screenshots: ['/projects/claude-usage-dock/dock.png', '/projects/claude-usage-dock/flyout.png'],
+		description:
+			"I kept running into my Claude Code usage limits in the middle of work. Checking `/usage` every few minutes got annoying, so I wanted a way to see how much I had left without having to stop what I was doing.\n\nI was already using the Dock in PowerToys Command Palette, a small bar at the top of the screen that shows CPU, GPU and network usage. I decided to make an extension that shows my Claude Code 5-hour and weekly usage limits alongside them.\n\nThe extension displays each limit as a small ring that fills up as usage increases. It turns amber at 80% and red at 95%. Clicking on it shows the usage for both windows, along with their exact reset times.\n\nIt doesn't need access to your Claude login or make any API calls. Claude Code already exposes usage information through its status line. The extension adds a small bridge in front of your existing status line to capture these numbers and pass them to the Dock. Your original status line continues to work as before.",
+		shortDescription:
+			'A PowerToys Command Palette extension that shows your Claude Code 5-hour and weekly limits in the Dock',
+		year: 2026,
+		technologies: ['C#', '.NET', 'WinRT', 'PowerToys', 'MSIX'],
+		slug: 'claude-usage-dock'
+	},
+	{
 		name: 'Boli',
 		codeUrl: 'https://github.com/Arihant25/boli',
 		deployedUrl: 'https://arihant25.github.io/boli/',
