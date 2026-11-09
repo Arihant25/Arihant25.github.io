@@ -13,6 +13,23 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'Note Names for MuseScore',
+		codeUrl: 'https://github.com/Arihant25/musescore-note-names',
+		deployedUrl: 'https://arihant25.github.io/musescore-note-names/',
+		coverImage: '/projects/note-names-for-musescore/note-names-1.png',
+		screenshots: [
+			'/projects/note-names-for-musescore/note-names-2.png',
+			'/projects/note-names-for-musescore/note-names-3.png',
+			'/projects/note-names-for-musescore/note-names-4.png'
+		],
+		description:
+			'I used the Note Names Plugin on MuseScore to help sightread notation quickly, but decided to skip the app and directly use the MuseScore website with this extension.',
+		shortDescription: 'A Chrome extension that shows note names on musescore.com sheet music',
+		year: 2026,
+		technologies: ['JavaScript', 'Chrome Extension', 'SVG'],
+		slug: 'note-names-for-musescore'
+	},
+	{
 		name: 'Usage Dock for Claude Code',
 		codeUrl: 'https://github.com/Arihant25/claude-usage-dock',
 		deployedUrl: 'https://apps.microsoft.com/detail/9NR3VBPN0XNM',
