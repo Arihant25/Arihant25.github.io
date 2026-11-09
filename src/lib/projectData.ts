@@ -13,6 +13,22 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		name: 'Custom Dock Text',
+		codeUrl: 'https://github.com/Arihant25/custom-dock-text',
+		deployedUrl: 'https://apps.microsoft.com/detail/9P4DH4N33GLQ',
+		coverImage: '/projects/custom-dock-text/custom-dock-text-1.png',
+		screenshots: [
+			'/projects/custom-dock-text/custom-dock-text-2.png',
+			'/projects/custom-dock-text/custom-dock-text-3.png'
+		],
+		description:
+			'I wanted to set custom text on my Command Palette Dock as a quick way to remember things throughout the day, so I made this.',
+		shortDescription: 'A PowerToys extension that puts your own text on the Command Palette Dock',
+		year: 2026,
+		technologies: ['C#', '.NET', 'WinRT', 'PowerToys', 'MSIX'],
+		slug: 'custom-dock-text'
+	},
+	{
 		name: 'Note Names for MuseScore',
 		codeUrl: 'https://github.com/Arihant25/musescore-note-names',
 		deployedUrl: 'https://arihant25.github.io/musescore-note-names/',
