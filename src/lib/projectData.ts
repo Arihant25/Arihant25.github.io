@@ -46,18 +46,18 @@ export const projects: Project[] = [
 		slug: 'note-names-for-musescore'
 	},
 	{
-		name: 'Usage Dock for Claude Code',
-		codeUrl: 'https://github.com/Arihant25/claude-usage-dock',
+		name: 'Usage Dock',
+		codeUrl: 'https://github.com/Arihant25/usage-dock',
 		deployedUrl: 'https://apps.microsoft.com/detail/9NR3VBPN0XNM',
-		coverImage: '/projects/claude-usage-dock/cover.png',
-		screenshots: ['/projects/claude-usage-dock/dock.png', '/projects/claude-usage-dock/flyout.png'],
+		coverImage: '/projects/usage-dock/cover.png',
+		screenshots: ['/projects/usage-dock/dock.png', '/projects/usage-dock/flyout.png'],
 		description:
 			"I kept running into my Claude Code usage limits in the middle of work. Checking `/usage` every few minutes got annoying, so I wanted a way to see how much I had left without having to stop what I was doing.\n\nI was already using the Dock in PowerToys Command Palette, a small bar at the top of the screen that shows CPU, GPU and network usage. I decided to make an extension that shows my Claude Code 5-hour and weekly usage limits alongside them.\n\nThe extension displays each limit as a small ring that fills up as usage increases. It turns amber at 80% and red at 95%. Clicking on it shows the usage for both windows, along with their exact reset times.\n\nIt doesn't need access to your Claude login or make any API calls. Claude Code already exposes usage information through its status line. The extension adds a small bridge in front of your existing status line to capture these numbers and pass them to the Dock. Your original status line continues to work as before.",
 		shortDescription:
 			'A PowerToys Command Palette extension that shows your Claude Code 5-hour and weekly limits in the Dock',
 		year: 2026,
 		technologies: ['C#', '.NET', 'WinRT', 'PowerToys', 'MSIX'],
-		slug: 'claude-usage-dock'
+		slug: 'usage-dock'
 	},
 	{
 		name: 'Is It Down',
